@@ -1,0 +1,30 @@
+
+server:
+  port: 8081
+  servlet:
+    context-path: /path
+
+logging:
+  level:
+    root: WARN
+    com:
+      ahua:
+        springdemo: Debug
+  file: log/mylog
+book:
+  name: 測試參數UAT
+  number: 77777
+  at: at參數${random.uuid}
+  retest: ${book.name},try it
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://127.0.0.1:3306/book?useUnicode=true&characterEncoding=utf-8
+    username: fansofcheer
+    password: cheerstyle
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+

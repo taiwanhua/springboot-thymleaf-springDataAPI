@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <title>Books</title>
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../static/css/bootstrap.min.css"
+          rel="stylesheet"/>
+</head>
+<body>
+<div>
+    <div th:class="container">
+        <div th:unless="${massge}==null"><span th:text="${massge}">信息提交成工</span></div>
+        <div><a th:href="@{/newone}" th:class="'btn bg-primary'">新增一筆</a></div>
+        <!--            index：當前迭代索引，從0開始（零）-->
+        <!--            count：到目前為止處理的元素數-->
+        <!--            size：列表中元素的總數-->
+        <!--            偶數/奇數：檢查當前迭代索引是偶數還是奇數-->
+        <!--            first：檢查當前迭代是否是第一個迭代-->
+        <!--            last：檢查當前迭代是否是最後一次迭代-->
+        <table th:class="'table table-hover'">
+            <tr th:each="f,iter:${c}" th:class="${iter.count}%2==1? 'bg-success'">
+                <td th:text="${f.id}"></td>
+                <td th:text="${f.at}"></td>
+                <td th:text="${f.name}"></td>
+                <td th:switch="${f.sex}">
+                    <span th:case="男">BOY</span>
+                    <span th:case="女">GIRL</span>
+                    <span th:case="陰陽人">BOY AND GIRL</span>
+                </td>
+                <td><a th:text="修改" th:href="@{/modify/{id}(id=${f.id})}"></a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

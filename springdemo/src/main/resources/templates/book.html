@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <title>book</title>
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../static/css/bootstrap.min.css"
+          rel="stylesheet"/>
+</head>
+<body>
+<!--
+<div>
+    <p>
+        <strong>at:</strong><span th:text="${book2.at}">預設</span>
+    </p>
+    <p>
+        <strong>name:</strong><span th:text="${book2.name}">預設</span></p>
+    <p>
+        <strong>number:</strong><span th:text="${book2.number}">預設</span></p>
+    <p>
+        <strong>retest:</strong><span th:text="${book2.retest}">預設</span></p>
+</div>
+-->
+<!--
+<div class="container" style="max-width: 700px;">
+    <h2 class="page-header" style="margin-top: 70px;">詳情</h2>
+    <div class="well" th:object="${book2}">
+        <p>
+            <strong>id:</strong><span th:text="*{id}">預設</span>
+        </p>
+        <p>
+            <strong>at:</strong><span th:text="*{at}">預設</span>
+        </p>
+        <p>
+            <strong>name:</strong><span th:text="*{name}">預設</span></p>
+        <p>
+            <strong>number:</strong><span th:text="*{number}">預設</span></p>
+        <p>
+            <strong>retest:</strong><span th:text="*{retest}">預設</span></p>
+    </div>
+</div>
+-->
+<!--
+<div class="container"
+     style="max-width: 700px;">
+    <h2 class="page-header"
+        style="margin-top: 70px;">詳情</h2>
+    <div class="well"
+         th:object="${book2}">
+        <p>
+            <strong>id:</strong>
+            <span th:text="*{id}">預設</span>
+        </p>
+        <p>
+            <strong>at:</strong>
+            <span th:text="*{at}">預設</span>
+        </p>
+        <p>
+            <strong>name:</strong>
+            <span th:text="*{name}">預設</span>
+        </p>
+        <p>
+            <strong>number:</strong>
+            <span th:text="*{number}">預設</span>
+        </p>
+        <p>
+            <strong>retest:</strong>
+            <span th:switch="*{retest}">
+                <span th:case="開">op拉</span>
+                <span th:case="高">high拉</span>
+            </span>
+        </p>
+    </div>
+</div>
+-->
+
+<div class="container"
+     style="max-width: 700px;">
+    <h2 class="page-header"
+        style="margin-top: 70px;">詳情</h2>
+    <div class="well"
+         th:object="${book2}">
+        <p>
+            <strong>id:</strong>
+            <span th:text="*{id}">預設</span>
+        </p>
+        <p>
+            <strong>at:</strong>
+            <span th:text="*{at}">預設</span>
+        </p>
+        <p>
+            <strong>name:</strong>
+            <span th:text="*{name}">預設</span>
+        </p>
+        <p>
+            <strong>number:</strong>
+            <span th:text="*{number}">預設</span>
+        </p>
+        <p>
+            <strong>retest:</strong>
+            <span th:switch="*{retest}">
+                <span th:case="開">op拉</span>
+                <span th:case="高">high拉</span>
+            </span>
+        </p>
+        <div class="alert alert-success"
+             th:if="*{retest}==開">開喔
+        </div>
+        <div class="alert alert-success"
+             th:if="*{retest}==高">高喔
+        </div>
+        <div class="alert alert-success"
+             th:unless="*{retest}==高">不高喔
+        </div>
+    </div>
+    <a href="javascript:history.go(-1)" class="btn btn-default">返回</a>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

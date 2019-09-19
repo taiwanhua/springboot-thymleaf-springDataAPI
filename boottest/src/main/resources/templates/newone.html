@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <title>Books</title>
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../static/css/bootstrap.min.css"
+          rel="stylesheet"/>
+</head>
+<body>
+<div>
+    <div th:class="'container'">
+        <form action="#" th:action="@{/new}" th:method="post" th:object="${c}">
+            <div class="form-group">
+                <input type="hidden"
+                       name="id"
+                       id="idn"
+                       class="form-control"
+                       th:field="*{id}">
+            </div>
+            <div class="form-group">
+                <label for="atn">at</label>
+                <input type="text"
+                       name="at"
+                       id="atn"
+                       class="form-control"
+                       th:field="*{at}">
+            </div>
+            <div class="form-group">
+                <label for="namen">name</label>
+                <input type="text"
+                       name="name"
+                       id="namen"
+                       class="form-control"
+                       th:field="*{name}">
+            </div>
+            <div class="form-group">
+                <label for="sexn">sex</label>
+                <select name="sex" id="sexn" class="form-control">
+                    <option value="男" th:selected="(*{sex}==男)">BOY</option>
+                    <option value="女" th:selected="(*{sex}==女)">GIRL</option>
+                    <option value="陰陽人" th:selected="(*{sex}==陰陽人)">BOYANDGIRL</option>
+                </select>
+
+            </div>
+            <div>
+                <button type="submit">提交</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

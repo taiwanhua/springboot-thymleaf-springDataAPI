@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:https="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <title>Books</title>
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../static/css/bootstrap.min.css"
+          rel="stylesheet"/>
+</head>
+<body>
+<div class="container"
+     style="max-width: 700px;margin-top: 50px;">
+    <div class="well">
+        <h1 class="page-header">新增一個書單</h1>
+        <!--        html name標籤 對應到實體類的元素-->
+        <form action="#"
+              method="post"
+              th:action="@{/books}"
+              th:object="${book2}">
+            <div>
+                <input type="hidden"
+                       name="id"
+                       th:value="*{id}">
+<!--                有個重點，我們Sprint JPA 沒辦法對第0列做update，因為hibernate index從1開始，並沒有第0列-->
+            </div>
+            <div class="form-group">
+                <label for="atn">at</label>
+                <input type="text"
+                       name="at"
+                       id="atn"
+                       class="form-control"
+                       th:field="*{at}">
+            </div>
+            <div class="form-group">
+                <label for="namen">name</label>
+                <input type="text"
+                       name="name"
+                       id="namen"
+                       class="form-control"
+                       th:field="*{name}">
+            </div>
+            <div class="form-group">
+                <label for="numbern">number</label>
+                <input type="text"
+                       name="number"
+                       id="numbern"
+                       class="form-control"
+                       th:field="*{number}">
+            </div>
+            <div class="form-group">
+                <label for="retestn">retest</label>
+                <select name="retest"
+                        id="retestn"
+                        class="form-control">
+                    <option value="開"
+                            th:selected="*{retest}==開">BBBBB
+                    </option>
+                    <option value="高"
+                            th:selected="*{retest}!=開">AA
+                    </option>
+                </select>
+            </div>
+            <p class="text-center">
+                <button class="btn-default"
+                        type="submit">提交
+                </button>
+            </p>
+        </form>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

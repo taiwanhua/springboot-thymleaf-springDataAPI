@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:https="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <title>Books</title>
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../static/css/bootstrap.min.css"
+          rel="stylesheet"/>
+</head>
+<body>
+<!--<div class="container">-->
+<!--    <h1 class="page-header">hi my books1</h1>-->
+<!--    <div class="text-right"><a href="#"-->
+<!--                               class="btn bg-primary "-->
+<!--                               th:href="@{/books/input}">新增書單</a></div>-->
+<!--    <table class="table table-bordered">-->
+<!--        <thead>-->
+<!--            <tr>-->
+<!--                <th>導引數</th>-->
+<!--                <th>at</th>-->
+<!--                <th>name</th>-->
+<!--                <th>number</th>-->
+<!--                <th>retest</th>-->
+<!--            </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--            -->
+<!--            index：當前迭代索引，從0開始（零）-->
+<!--            count：到目前為止處理的元素數-->
+<!--            size：列表中元素的總數-->
+<!--            偶數/奇數：檢查當前迭代索引是偶數還是奇數-->
+<!--            first：檢查當前迭代是否是第一個迭代-->
+<!--            last：檢查當前迭代是否是最後一次迭代-->
+<!--            -->
+<!--            <tr th:each="bookxx,iterStat:${all1}"-->
+<!--                th:class="${iterStat.count}%2==1? 'bg-success'">-->
+<!--                <td><a href="#"-->
+<!--                       th:text="${iterStat.size}"-->
+<!--                       th:href="@{/books/{id}(id=${iterStat.index})}">def</a>-->
+<!--                </td>-->
+<!--                <td><a href="#"-->
+<!--                       th:text="${bookxx.at}"-->
+<!--                       th:href="@{'/books/'+${iterStat.index}}">def</a>-->
+<!--                </td>-->
+<!--                <td th:text="${bookxx.name}">def</td>-->
+<!--                <td th:text="${bookxx.number}">def</td>-->
+<!--                <td th:switch="*{bookxx.retest}">-->
+<!--                    <span th:case="開">BBBBB</span>-->
+<!--                    <span th:case="*">AA</span>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--</div>-->
+<div class="container">
+    <h1 class="page-header">hi my books1</h1>
+    <div  th:unless="${#strings.isEmpty(message)}" class="alert alert-success alert-dismissable fade in">
+        <!--Div裡的th:unless="${message}==null" 可以寫成 th:unless="${#strings.Empty(message)}" -->
+        <a href="#"
+           class="close"
+           data-dismiss="alert">
+            &times;
+        </a>
+        <strong>恭喜</strong>
+        <span th:text="${message}">信息提交成工</span>
+    </div>
+    <div class="text-right"><a href="#"
+                               class="btn bg-primary "
+                               th:href="@{/books/input}">新增書單</a></div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>導引數</th>
+                <th>at</th>
+                <th>name</th>
+                <th>number</th>
+                <th>retest</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--            index：當前迭代索引，從0開始（零）-->
+            <!--            count：到目前為止處理的元素數-->
+            <!--            size：列表中元素的總數-->
+            <!--            偶數/奇數：檢查當前迭代索引是偶數還是奇數-->
+            <!--            first：檢查當前迭代是否是第一個迭代-->
+            <!--            last：檢查當前迭代是否是最後一次迭代-->
+            <tr th:each="bookxx,iterStat:${all1}"
+                th:class="${iterStat.count}%2==1? 'bg-success'">
+                <td><a href="#"
+                       th:text="${bookxx.id}"
+                       th:href="@{/books/{id}(id=${bookxx.id})}">def</a>
+                </td>
+                <td><a href="#"
+                       th:text="${bookxx.at}"
+                       th:href="@{'/books/'+${iterStat.index}}">def</a>
+                </td>
+                <td th:text="${bookxx.name}">def</td>
+                <td th:text="${bookxx.number}">def</td>
+                <td th:switch="*{bookxx.retest}">
+                    <span th:case="開">BBBBB</span>
+                    <span th:case="*">AA</span>
+                </td>
+                <td><a href="#"
+                       th:href="@{/books/{id}/input(id=${bookxx.id})}">修改</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <title>book</title>
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../static/css/bootstrap.min.css"
+          rel="stylesheet"/>
+</head>
+<body>
+<div class="container" style="max-width: 600px;margin-top: 50px;">
+    <div class="well">
+        <form action="#" method="post" th:action="@{/reg}" th:object="${qtwopass}">
+            <div>
+                <label class="form-group" for="usernamel">用戶名</label>
+                <input class="form-control" type="text" name="username" id="usernamel" th:field="*{username}">
+                <p class="form-control-static text-danger" th:if="${#fields.hasErrors('username')}"
+                   th:errors="*{username}">132</p>
+            </div>
+            <div>
+                <label class="form-group" for="userpassl">密碼</label>
+                <input class="form-control" type="text" name="userpass" id="userpassl" th:field="*{userpass}">
+                <p class="form-control-static text-danger" th:if="${#fields.hasErrors('userpass')}"
+                   th:errors="*{userpass}">132</p>
+            </div>
+            <div>
+                <label class="form-group" for="checkuserpassl">密碼</label>
+                <input class="form-control" type="text" name="checkuserpass" id="checkuserpassl"
+                       th:field="*{checkuserpass}">
+                <p class="form-control-static text-danger" th:if="${#fields.hasErrors('checkuserpass')}"
+                   th:errors="*{checkuserpass}">132</p>
+            </div>
+            <div>
+                <label class="form-group" for="phonel">手機</label>
+                <input class="form-control" type="text" name="phone" id="phonel" th:field="*{phone}">
+                <p class="form-control-static text-danger" th:if="${#fields.hasErrors('phone')}"
+                   th:errors="*{phone}">132</p>
+            </div>
+            <div>
+                <label class="form-group" for="emaill">E-mail</label>
+                <input class="form-control" type="text" name="email" id="emaill" th:field="*{email}">
+                <p class="form-control-static text-danger" th:if="${#fields.hasErrors('email')}"
+                   th:errors="*{email}">132</p>
+            </div>
+            <p class="text-center">
+                <button type="submit" class="btn btn-primary" th:href="@{/reg}">註冊</button>
+            </p>
+        </form>
+
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

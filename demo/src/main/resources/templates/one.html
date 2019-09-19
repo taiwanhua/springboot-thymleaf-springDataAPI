@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../static/js/in.js" th:src="@{/js/in.js}"></script>
+    <script>alert("jisdf")</script>
+
+</head>
+<body>
+
+<p>請猜1-100間數字</p>
+<input id="inpu" type="text" >
+<input type="button" id="btn" value="猜"></input>
+<h1 id="h1" value=" "> </h1>
+<script>
+    var ans=Math.floor(Math.random()*100);
+    var inpu=document.getElementById("inpu");
+    var btn=document.getElementById("btn");
+    var h1=document.getElementById("h1");
+    btn.onclick=function () {
+        var geuss = inpu.value;
+
+        if (geuss < ans) {
+            h1.innerHTML="答案在"+geuss+"與100之間";
+        }
+        if (geuss > ans) {
+            h1.innerHTML="答案在0與"+geuss+"之間";
+
+        }
+        if (geuss == ans) {
+            h1.innerHTML="答案對了";
+
+        }
+
+    };
+</script>
+</body>
+
+
+</html>

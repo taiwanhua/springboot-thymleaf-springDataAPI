@@ -1,0 +1,17 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /path
+
+logging:
+  level:
+    root: WARN
+    com:
+      ahua:
+        springdemo: Debug
+  file: log/mylog
+book:
+  name: 測試參數DEV
+  id: 77777
+  at: at參數${random.uuid}
+  retest: ${book.name},try it

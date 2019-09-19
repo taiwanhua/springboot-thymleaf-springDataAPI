@@ -1,0 +1,13 @@
+logging:
+  level:
+    root: WARN
+    com:
+      ahua:
+        springdemo: Debug
+  file: log/mylog
+book:
+  name: 測試參數DEV
+  id: 0
+  at: at參數${random.uuid}
+  retest: ${book.name},try it
+
