@@ -1,0 +1,469 @@
+createdAt: "2019-05-11T17:46:27.962Z"
+updatedAt: "2019-05-11T18:09:33.055Z"
+type: "SNIPPET_NOTE"
+folder: "888163b6bb8ae21eaf80"
+title: "5.1.2 code"
+tags: []
+description: "5.1.2 code"
+snippets: [
+  {
+    linesHighlighted: []
+    name: "User.java"
+    mode: "Java"
+    content: '''
+      package com.example.fom.domain;
+      
+      import javax.persistence.Entity;
+      import javax.persistence.GeneratedValue;
+      import javax.persistence.GenerationType;
+      import javax.persistence.Id;
+      
+      @Entity
+      public class User {
+      
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        private Long id;
+      
+        private String username;
+      
+        private String userpass;
+      
+        private String phone;
+      
+        private String email;
+      
+        public User() {}
+      
+        public Long getId() {
+          return id;
+        }
+      
+        public void setId(Long id) {
+          this.id = id;
+        }
+      
+        public String getUsername() {
+          return username;
+        }
+      
+        public void setUsername(String username) {
+          this.username = username;
+        }
+      
+        public String getUserpass() {
+          return userpass;
+        }
+      
+        public void setUserpass(String userpass) {
+          this.userpass = userpass;
+        }
+      
+        public String getPhone() {
+          return phone;
+        }
+      
+        public void setPhone(String phone) {
+          this.phone = phone;
+        }
+      
+        public String getEmail() {
+          return email;
+        }
+      
+        public void setEmail(String email) {
+          this.email = email;
+        }
+      
+        @Override
+        public String toString() {
+          return "User{"
+              + "id='"
+              + id
+              + '\\''
+              + ", username='"
+              + username
+              + '\\''
+              + ", userpass='"
+              + userpass
+              + '\\''
+              + ", phone="
+              + phone
+              + ", email='"
+              + email
+              + '\\''
+              + '}';
+        }
+      }
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "Twopass.java"
+    mode: "Java"
+    content: '''
+      package com.example.fom.domain;
+      
+      import org.hibernate.validator.constraints.Length;
+      import org.springframework.beans.BeanUtils;
+      
+      import javax.validation.constraints.Email;
+      import javax.validation.constraints.NotBlank;
+      import javax.validation.constraints.Pattern;
+      
+      public class Twopass {
+        //////////////////////////////////////////這邊添加的標註就是要驗證的項目@NotBlank-非空、@Length-長度、@Pattern-正則表達式
+        @NotBlank private String username;
+      
+        @Length(min = 6, message = "至少6個字，智障")
+        @NotBlank
+        private String userpass;
+      
+        @NotBlank private String checkuserpass;
+      
+        @Pattern(regexp = "[\\\\d]{10}", message = "要符合啦智障")
+        private String phone;
+      
+        @Email private String email;
+      
+        public Twopass() {}
+      
+        public String getUsername() {
+          return username;
+        }
+      
+        public void setUsername(String username) {
+          this.username = username;
+        }
+      
+        public String getUserpass() {
+          return userpass;
+        }
+      
+        public void setUserpass(String userpass) {
+          this.userpass = userpass;
+        }
+      
+        public String getCheckuserpass() {
+          return checkuserpass;
+        }
+      
+        public void setCheckuserpass(String checkuserpass) {
+          this.checkuserpass = checkuserpass;
+        }
+      
+        public String getPhone() {
+          return phone;
+        }
+      
+        public void setPhone(String phone) {
+          this.phone = phone;
+        }
+      
+        public String getEmail() {
+          return email;
+        }
+      
+        public void setEmail(String email) {
+          this.email = email;
+        }
+      
+        public User conver() {
+          User user = new UseinterST().convert(this);
+          return user;
+        }
+      
+        private class UseinterST implements InterST<Twopass, User> {
+      
+          @Override
+          public User convert(Twopass twopass) {
+            User user = new User();
+            BeanUtils.copyProperties(twopass, user);
+            return user;
+          }
+        }
+      
+        public Boolean eu() {
+          return (this.getUserpass()).equals(this.getCheckuserpass());
+        }
+      }
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "Reg.java"
+    mode: "Java"
+    content: '''
+      package com.example.fom.web;
+      
+      import com.example.fom.domain.Twopass;
+      import com.example.fom.domain.UseinterST;
+      import com.example.fom.domain.User;
+      import com.example.fom.domain.UserRepos;
+      import org.springframework.beans.BeanUtils;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.stereotype.Controller;
+      import org.springframework.ui.Model;
+      import org.springframework.validation.BindingResult;
+      import org.springframework.validation.FieldError;
+      import org.springframework.web.bind.annotation.GetMapping;
+      import org.springframework.web.bind.annotation.ModelAttribute;
+      import org.springframework.web.bind.annotation.PostMapping;
+      import org.springframework.web.bind.annotation.RequestParam;
+      
+      import javax.validation.Valid;
+      import java.util.List;
+      
+      @Controller
+      public class Reg {
+        @Autowired private UserRepos userRepos;
+      
+        @GetMapping("/login")
+        public String login() {
+          return "login";
+        }
+      
+        @GetMapping("/reg")
+        public String reg(Model model) {
+          model.addAttribute("qtwopass", new Twopass());
+          return "reg";
+        }
+      
+        //  @PostMapping("/reg")
+        //  public String regPost(Twopass twopass) {
+        //    User user = new User();
+        //    BeanUtils.copyProperties(twopass, user);  //經過這方法後上一行new出來的user，就被從twopass灌相同name的值進去了，
+        //    userRepos.save(user);
+        //    return "redirect:/login";
+        //  }
+      
+        /// ###########################################將BeanUtils.copyProperties(twopass, user);封裝至方法
+        //  @PostMapping("/reg")
+        //  public String regPost(Twopass twopass) {
+        //    User user = copyPer(twopass);
+        //    userRepos.save(user);
+        //    return "redirect:/login";
+        //  }
+        //
+        //  private User copyPer(Twopass twopass) {
+        //    User user = new User();
+        //    BeanUtils.copyProperties(twopass, user);
+        //    return user;
+        //  }
+      
+        ///// #########################################以面向接口的方式泛型轉換類實現轉換實體類
+        //  @PostMapping("/reg")
+        //  public String regPost(Twopass twopass) {
+        //    User user = new UseinterST().convert(twopass);
+        //    userRepos.save(user);
+        //    return "redirect:/login";
+        //  }
+      
+        ///// ###############################再將轉換方法直接放到Twopass類中
+        //  @PostMapping("/reg")
+        //  public String regPost(Twopass twopass) {
+        //    User user = twopass.conver();
+        //    userRepos.save(user);
+        //    return "redirect:/login";
+        //  }
+        /////////// ############################## 最後想把接接口類的UseinterST省略，直接在實體類Twopass接接口
+        @PostMapping("/reg")
+        public String regPost(@Valid @ModelAttribute("qtwopass") Twopass twopass, BindingResult bindingResult, Model module) {
+      
+            module.addAttribute("qtwopass",twopass);//這一行可以省略因為上面 @ModelAttribute標註會自動添加Model屬性(為渲染到模板做準備)
+          Boolean r = true;
+          if (!twopass.getUserpass().isBlank()) {
+            if (!twopass.eu()) {
+              bindingResult.rejectValue("checkuserpass", "errorcom", "密碼不相等");//自定義檢核條件與錯誤訊息
+              r = false;
+            }
+          }
+          //這裡為打印錯誤訊息至控制台，打印出來就代表有檢核到，並且會保留值到reg.html上
+              if (bindingResult.hasErrors()) {
+                List<FieldError> f = bindingResult.getFieldErrors();
+                for (FieldError error : f) {
+                  System.out.println(
+                      error.getField() + ":" + error.getDefaultMessage() + ":" + error.getCode());
+                }
+                r = false;
+              }
+      
+          if (false == r) {
+            return "reg";
+          }
+          User user = twopass.conver();
+          userRepos.save(user);
+          return "redirect:/login";
+        }
+      }
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "InterST.java"
+    mode: "Java"
+    content: '''
+      package com.example.fom.domain;
+      
+      public interface InterST<S,T> {
+          ///S是傳入的對象，T轉出的對象
+          T convert(S s);
+      
+           default T convert1(S s, Long i) {////default 使得接口類內可以存在不須覆寫之方法
+              return null;
+          }
+      }
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "UseinterST.java"
+    mode: "Java"
+    content: '''
+      package com.example.fom.domain;
+      
+      import org.springframework.beans.BeanUtils;
+      
+      public class UseinterST implements InterST<Twopass, Object> {
+      
+        ///// ############寫到實體類Twopass後就省略
+        //  @Override
+        //  public User convert(Twopass twopass) {
+        //    User user = new User();
+        //    BeanUtils.copyProperties(twopass, user);
+        //    return user;
+        //  }
+        @Override
+        public User convert(Twopass twopass) {
+          return null;
+        }
+      
+      }
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "UserRepos.java"
+    mode: "Java"
+    content: '''
+      package com.example.fom.domain;
+      
+      import org.springframework.data.jpa.repository.JpaRepository;
+      
+      public interface UserRepos extends JpaRepository<User, Long> {
+      }
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "login.html"
+    mode: "HTML"
+    content: '''
+      <!DOCTYPE html>
+      <html lang="en"
+            xmlns:th="http://www.w3.org/1999/xhtml">
+      <head>
+          <meta charset="UTF-8"/>
+          <meta http-equiv="X-UA-Compatible"
+                content="IE=edge">
+          <meta name="viewport"
+                content="width=device-width, initial-scale=1">
+          <title>book</title>
+          <link th:href="@{/css/bootstrap.min.css}"
+                href="../static/css/bootstrap.min.css"
+                rel="stylesheet"/>
+      </head>
+      <body>
+      <div class="container">
+          <div class="well">
+              <form action="#" method="post" >
+                  <div>
+                      <label class="form-group" for="usernamel">用戶名</label>
+                      <input class="form-control" type="text" name="username" id="usernamel">
+                  </div>
+                  <div>
+                      <label class="form-group" for="userpassl">密碼</label>
+                      <input class="form-control" type="text" name="userpass" id="userpassl">
+                  </div>
+      
+                  <p>
+                      <button type="submit" class="btn btn-primary" th:href="@{/reg}">登入</button>
+                  </p>
+              </form>
+      
+          </div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+      <script th:src="@{/js/bootstrap.min.js}"></script>
+      </body>
+      </html>
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "reg.html"
+    mode: "HTML"
+    content: '''
+      <!DOCTYPE html>
+      <html lang="en"
+            xmlns:th="http://www.w3.org/1999/xhtml">
+      <head>
+          <meta charset="UTF-8"/>
+          <meta http-equiv="X-UA-Compatible"
+                content="IE=edge">
+          <meta name="viewport"
+                content="width=device-width, initial-scale=1">
+          <title>book</title>
+          <link th:href="@{/css/bootstrap.min.css}"
+                href="../static/css/bootstrap.min.css"
+                rel="stylesheet"/>
+      </head>
+      <body>
+      <div class="container" style="max-width: 600px;margin-top: 50px;">
+          <div class="well">
+              <form action="#" method="post" th:action="@{/reg}" th:object="${qtwopass}">
+                  <div>
+                      <label class="form-group" for="usernamel">用戶名</label>
+                      <input class="form-control" type="text" name="username" id="usernamel" th:field="*{username}">
+                  </div>
+                  <div>
+                      <label class="form-group" for="userpassl">密碼</label>
+                      <input class="form-control" type="text" name="userpass" id="userpassl" th:field="*{userpass}">
+                  </div>
+                  <div>
+                      <label class="form-group" for="checkuserpassl">密碼</label>
+                      <input class="form-control" type="text" name="checkuserpass" id="checkuserpassl"
+                             th:field="*{checkuserpass}">
+                  </div>
+                  <div>
+                      <label class="form-group" for="phonel">手機</label>
+                      <input class="form-control" type="text" name="phone" id="phonel" th:field="*{phone}">
+                  </div>
+                  <div>
+                      <label class="form-group" for="emaill">E-mail</label>
+                      <input class="form-control" type="text" name="email" id="emaill" th:field="*{email}">
+                  </div>
+                  <p class="text-center">
+                      <button type="submit" class="btn btn-primary" th:href="@{/reg}">註冊</button>
+                  </p>
+              </form>
+      
+          </div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+      <script th:src="@{/js/bootstrap.min.js}"></script>
+      </body>
+      </html>
+      
+    '''
+  }
+]
+isStarred: false
+isTrashed: false

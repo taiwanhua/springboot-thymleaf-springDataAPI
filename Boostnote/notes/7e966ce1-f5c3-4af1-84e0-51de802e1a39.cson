@@ -1,0 +1,115 @@
+createdAt: "2019-04-29T15:46:17.183Z"
+updatedAt: "2019-05-04T16:32:52.480Z"
+type: "SNIPPET_NOTE"
+folder: "888163b6bb8ae21eaf80"
+title: "1.6 code"
+tags: []
+description: "1.6 code"
+snippets: [
+  {
+    linesHighlighted: []
+    name: "pom.xml"
+    mode: "XML"
+    content: '''
+      <?xml version="1.0" encoding="UTF-8"?>
+      <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+          <modelVersion>4.0.0</modelVersion>
+          <parent>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-parent</artifactId>
+              <version>2.1.4.RELEASE</version>
+              <relativePath/> <!-- lookup parent from repository -->
+          </parent>
+          <groupId>com.ahua</groupId>
+          <artifactId>springdemo</artifactId>
+          <version>0.0.1-SNAPSHOT</version>
+          <name>springdemo</name>
+          <description>Demo project for Spring Boot</description>
+      
+          <properties>
+              <java.version>11</java.version>
+          </properties>
+      
+          <dependencies>
+              <dependency>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-starter-web</artifactId>
+              </dependency>
+      
+              <dependency>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-starter-test</artifactId>
+                  <scope>test</scope>
+              </dependency>
+              <dependency>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-starter-thymeleaf</artifactId>
+              </dependency>
+            <!--引入mariadb.jdbc 開始-->
+              <dependency>
+                  <groupId>org.mariadb.jdbc</groupId>
+                  <artifactId>mariadb-java-client</artifactId>
+              </dependency>
+            <!--引入mariadb.jdbc 結束-->
+            
+            <!--引入spring data-jpa 開始-->
+              <dependency>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-starter-data-jpa</artifactId>
+              </dependency>
+            <!--引入spring data-jpa 結束-->
+          </dependencies>
+          <build>
+              <plugins>
+                  <plugin>
+                      <groupId>org.springframework.boot</groupId>
+                      <artifactId>spring-boot-maven-plugin</artifactId>
+                  </plugin>
+              </plugins>
+          </build>
+      
+      </project>
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "application.properties"
+    mode: "Properties files"
+    content: '''
+      spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+      spring.datasource.url= jdbc:mariadb://127.0.0.1:3306/book?useUnicode=true&characterEncoding=utf-8
+      spring.datasource.username= fansofcheer
+      spring.datasource.password= cheerstyle
+      jpa.hibernate.ddl-auto: update
+      jpa.show-sql: true
+      
+      
+    '''
+  }
+  {
+    name: "application.yml"
+    mode: "YAML"
+    content: '''
+      #####application.properties等價寫法
+      
+      
+      spring:
+        datasource:
+          driver-class-name: org.mariadb.jdbc.Driver
+          url: jdbc:mariadb://127.0.0.1:3306/conbook?useUnicode=true&characterEncoding=utf-8
+          username: fansofcheer
+          password: cheerstyle
+      
+        jpa:
+          hibernate:
+            ddl-auto: update
+          show-sql: true
+      
+    '''
+    linesHighlighted: []
+  }
+]
+isStarred: false
+isTrashed: false

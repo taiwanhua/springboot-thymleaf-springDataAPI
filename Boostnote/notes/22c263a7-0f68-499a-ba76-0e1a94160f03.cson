@@ -1,0 +1,205 @@
+createdAt: "2019-05-05T11:37:46.053Z"
+updatedAt: "2019-05-05T13:55:44.832Z"
+type: "SNIPPET_NOTE"
+folder: "888163b6bb8ae21eaf80"
+title: "3.5 code"
+tags: []
+description: "3.5 code"
+snippets: [
+  {
+    linesHighlighted: []
+    name: "contest.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.web;
+      
+      import com.example.boottest.domin.Book;
+      import com.example.boottest.service.Bookservice;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.stereotype.Controller;
+      import org.springframework.ui.Model;
+      import org.springframework.web.bind.annotation.*;
+      
+      import java.util.List;
+      import java.util.Optional;
+      
+      @Controller
+      public class contest {
+        // Web層
+        @Autowired private Bookservice bookservice;
+      
+        @PostMapping("/sql")
+        public String s(
+            @RequestParam Long id,
+            @RequestParam String name,
+            @RequestParam String at,
+            @RequestParam String sex,
+            Model model) {
+          int bb = bookservice.upErorrup(sex,at); ////當報錯的時候會回滾
+          model.addAttribute("c", bb);
+          System.out.println(bb);
+          return "hi";
+        }
+      }
+      
+    '''
+  }
+  {
+    name: "Bookservice.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.service;
+      
+      import com.example.boottest.domin.Book;
+      import com.example.boottest.domin.BookRepository;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.data.jpa.repository.Modifying;
+      import org.springframework.stereotype.Service;
+      import org.springframework.transaction.annotation.Transactional;
+      
+      import java.util.List;
+      import java.util.Optional;
+      
+      @Service
+      public class Bookservice {
+        // Service層
+        @Autowired private BookRepository bookRepository;
+      
+        @Transactional()   ////添加@Transactional()標註，當報錯的時候會回滾
+        public int upErorrup(String sex, String at) {
+      
+          int b = bookRepository.updatebyJPQL(sex, at);
+          int a = bookRepository.upBySQL(); ////有錯誤
+          return a + b;
+        }
+      }
+      
+    '''
+    linesHighlighted: []
+  }
+  {
+    name: "BookRepository.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.domin;
+      
+      import org.springframework.data.jpa.repository.JpaRepository;
+      import org.springframework.data.jpa.repository.Modifying;
+      import org.springframework.data.jpa.repository.Query;
+      import org.springframework.stereotype.Repository;
+      import org.springframework.transaction.annotation.Transactional;
+      
+      import java.util.List;
+      
+      public interface BookRepository extends JpaRepository<Book, Long> {
+        // interface(接口)層
+      
+        @Modifying
+        @Transactional()
+        @Query(
+            value = "UPDATE book SET 'id'=1,'a1t'=\\"泰\\",'name'=\\"小西\\",'sex'=\\"女\\" WHERE 'id'=1000 ",
+            nativeQuery = true)
+        int upBySQL(); //////有錯誤
+      
+        @Modifying
+        @Transactional()
+        @Query("update Book b set b.sex = ?1  where at=?2")
+        int updatebyJPQL(String sex, String at);
+      }
+      
+    '''
+    linesHighlighted: []
+  }
+  {
+    name: "Book.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.domin;
+      
+      import org.springframework.boot.context.properties.ConfigurationProperties;
+      import org.springframework.stereotype.Component;
+      
+      import javax.persistence.Entity;
+      import javax.persistence.GeneratedValue;
+      import javax.persistence.GenerationType;
+      import javax.persistence.Id;
+      
+      @Entity
+      public class Book {
+        // 實體類
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        private Long id;
+      
+        String name;
+        String at;
+        String sex;
+      
+        public Book() {}
+      
+        public String getName() {
+          return name;
+        }
+      
+        public void setName(String name) {
+          this.name = name;
+        }
+      
+        public String getAt() {
+          return at;
+        }
+      
+        public void setAt(String at) {
+          this.at = at;
+        }
+      
+        public Long getId() {
+          return id;
+        }
+      
+        public void setId(Long id) {
+          this.id = id;
+        }
+      
+        public String getSex() {
+          return sex;
+        }
+      
+        public void setSex(String sex) {
+          this.sex = sex;
+        }
+      }
+      
+    '''
+    linesHighlighted: []
+  }
+  {
+    name: "hi.html"
+    mode: "HTML"
+    content: '''
+      <!DOCTYPE html>
+      <html lang="en"
+            xmlns:th="http://www.w3.org/1999/xhtml">
+      <head>
+          <meta charset="UTF-8">
+          <title>Title</title>
+      </head>
+      <body>
+      test success<br>
+      <table>
+          <tr th:each="f,iter:${c}">
+              <td th:text="${f.id}"></td>
+              <td th:text="${f.at}"></td>
+              <td th:text="${f.name}"></td>
+              <td th:text="${f.sex}"></td>
+          </tr>
+      </table>
+      </body>
+      </html>
+      
+    '''
+    linesHighlighted: []
+  }
+]
+isStarred: false
+isTrashed: false

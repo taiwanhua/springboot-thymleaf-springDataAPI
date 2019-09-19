@@ -1,0 +1,261 @@
+createdAt: "2019-05-04T16:41:32.797Z"
+updatedAt: "2019-05-04T17:15:37.088Z"
+type: "SNIPPET_NOTE"
+folder: "888163b6bb8ae21eaf80"
+title: "3.1 方法1 code"
+tags: []
+description: "3.1 方法1 code "
+snippets: [
+  {
+    linesHighlighted: []
+    name: "contest.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.web;
+      
+      import com.example.boottest.domin.Book;
+      import com.example.boottest.service.Bookservice;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.stereotype.Controller;
+      import org.springframework.ui.Model;
+      import org.springframework.web.bind.annotation.*;
+      
+      @Controller
+      public class contest {
+        // Web層
+        @Autowired private Bookservice bookservice;
+      
+        @PostMapping("/save")
+        public String s(
+            @RequestParam(required = false) Long id,                 ////如果有不須在Post提交時必輸的，必須添加required = false，否則沒傳值就會報錯
+            @RequestParam String name,
+            @RequestParam String at,
+            @RequestParam String sex) {
+          Book c = new Book();
+          c.setAt(at);
+          c.setName(name);
+          c.setSex(sex);
+          bookservice.addone(c);
+          return "hi";                  /////沒有添加Model，hi.html頁面將只顯示原本html內容
+        }
+      }
+      
+      
+      ///////////////////////////////////////////////////////以下Model傳遞值，並在html用th標籤取得值
+      package com.example.boottest.web;
+      
+      import com.example.boottest.domin.Book;
+      import com.example.boottest.service.Bookservice;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.stereotype.Controller;
+      import org.springframework.ui.Model;
+      import org.springframework.web.bind.annotation.*;
+      
+      @Controller
+      public class contest {
+        // Web層
+        @Autowired private Bookservice bookservice;
+      
+        @PostMapping("/save")
+        public String s(
+            @RequestParam(required = false) Long id,
+            @RequestParam String name,
+            @RequestParam String at,
+            @RequestParam String sex,
+            Model model) {
+          Book c = new Book();
+          c.setAt(at);
+          c.setName(name);
+          c.setSex(sex);
+          model.addAttribute("b", c);
+          bookservice.addone(c);     //只要有經過bookservice的方法，將會一併刷新原本model內id的null值為回傳index
+          return "hi";
+        }
+      }
+      
+      
+      ///////////////////////////////////////////////////////以下要補充關於 bookservice.addone(c); 對於 id 自動帶值的變化
+      
+      
+      package com.example.boottest.web;
+      
+      import com.example.boottest.domin.Book;
+      import com.example.boottest.service.Bookservice;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.stereotype.Controller;
+      import org.springframework.ui.Model;
+      import org.springframework.web.bind.annotation.*;
+      
+      @Controller
+      public class contest {
+        // Web層
+        @Autowired private Bookservice bookservice;
+      
+        @PostMapping("/save")
+        public String s(
+            @RequestParam(required = false) Long id,
+            @RequestParam String name,
+            @RequestParam String at,
+            @RequestParam String sex,
+            Model model) {
+          Book c = new Book();
+          c.setAt(at);
+          c.setName(name);
+          c.setSex(sex);
+          bookservice.addone(c);
+          c.setId(id);               ////在 bookservice.addone(c)後在硬塞空值，在放到model，此時就能讓Model內值為空
+          model.addAttribute("b", c);
+          return "hi";
+        }
+      }
+      
+    '''
+  }
+  {
+    name: "Bookservice.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.service;
+      
+      import com.example.boottest.domin.Book;
+      import com.example.boottest.domin.BookRepository;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.stereotype.Service;
+      
+      @Service
+      public class Bookservice {
+        // Service層
+        @Autowired private BookRepository bookRepository;
+      
+        public Book addone(Book b) {
+      
+          return bookRepository.save(b);
+        }
+      }
+      
+    '''
+    linesHighlighted: []
+  }
+  {
+    name: "BookRepository.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.domin;
+      
+      import org.springframework.data.jpa.repository.JpaRepository;
+      import org.springframework.stereotype.Repository;
+      
+      public interface BookRepository extends JpaRepository<Book, Long> {
+        // interface(接口)層
+      }
+      
+    '''
+    linesHighlighted: []
+  }
+  {
+    name: "Book.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.domin;
+      
+      import org.springframework.boot.context.properties.ConfigurationProperties;
+      import org.springframework.stereotype.Component;
+      
+      import javax.persistence.Entity;
+      import javax.persistence.GeneratedValue;
+      import javax.persistence.GenerationType;
+      import javax.persistence.Id;
+      
+      @Entity
+      public class Book {
+        // 實體類
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        private Long id;
+      
+        String name;
+        String at;
+        String sex;
+      
+        public Book() {}
+      
+        public String getName() {
+          return name;
+        }
+      
+        public void setName(String name) {
+          this.name = name;
+        }
+      
+        public String getAt() {
+          return at;
+        }
+      
+        public void setAt(String at) {
+          this.at = at;
+        }
+      
+        public Long getId() {
+          return id;
+        }
+      
+        public void setId(Long id) {
+          this.id = id;
+        }
+      
+        public String getSex() {
+          return sex;
+        }
+      
+        public void setSex(String sex) {
+          this.sex = sex;
+        }
+      }
+      
+    '''
+    linesHighlighted: []
+  }
+  {
+    name: "hi.html"
+    mode: "HTML"
+    content: '''
+      沒有傳入Model使用
+      <html lang="en"
+            xmlns:th="http://www.w3.org/1999/xhtml">
+      <head>
+          <meta charset="UTF-8">
+          <title>Title</title>
+      </head>
+      <body>
+      test success<br>
+      </body>
+      </html>
+      
+      
+      
+      
+      ////////////////////////////////////////////////////////////////////////////////
+      
+      有傳入Model使用
+      <!DOCTYPE html>
+      <html lang="en"
+            xmlns:th="http://www.w3.org/1999/xhtml">
+      <head>
+          <meta charset="UTF-8">
+          <title>Title</title>
+      </head>
+      <body>
+      test success<br>
+      <div th:text="${b.at}"></div>
+      <div th:text="${b.name}"></div>
+      <div th:text="${b.sex}"></div>
+      <div th:text="${b.id}"></div>
+      </body>
+      </html>
+      
+    '''
+    linesHighlighted: []
+  }
+]
+isStarred: false
+isTrashed: false

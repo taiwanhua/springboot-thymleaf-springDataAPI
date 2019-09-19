@@ -1,0 +1,40 @@
+createdAt: "2019-05-04T03:30:09.593Z"
+updatedAt: "2019-05-04T03:58:03.852Z"
+type: "SNIPPET_NOTE"
+folder: "888163b6bb8ae21eaf80"
+title: "2.2 方法1 code"
+tags: []
+description: "2.2 方法1 code "
+snippets: [
+  {
+    linesHighlighted: []
+    name: "contest.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.web;
+      
+      import com.example.boottest.domin.Book;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.stereotype.Controller;
+      import org.springframework.web.bind.annotation.GetMapping;
+      import org.springframework.web.bind.annotation.RequestMapping;
+      import org.springframework.web.bind.annotation.ResponseBody;
+      import org.springframework.web.bind.annotation.RestController;
+      
+      @RestController    //使用@RestController標註了就一定要指定路由
+      //@RequestMapping("/s1")    //如果只有加在這，那只是增加路由，並不會指定到某個方法所以若連"路徑/s1"會報錯  ，另外這裡並沒有指定http Request 請求方法表示接受任何請求方法
+      public class contest {
+      
+        @RequestMapping("/s")   //一定要在方法上加上@RequestMapping，這樣連"路徑/s"才會返回"hi"這個字符串，另外若是返回List，則會在網頁上顯示json格式
+                                //另外上面如果有加入@RequestMapping("/s1")這樣變成連"路徑/s1/s"才會返回"hi"這個字符串
+        public String one() {
+      
+          return "hi";
+        }
+      }
+      
+    '''
+  }
+]
+isStarred: false
+isTrashed: false

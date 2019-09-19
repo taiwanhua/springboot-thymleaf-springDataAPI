@@ -1,0 +1,21 @@
+createdAt: "2019-05-09T08:35:25.388Z"
+updatedAt: "2019-05-10T08:55:42.993Z"
+type: "MARKDOWN_NOTE"
+folder: "888163b6bb8ae21eaf80"
+title: "疑難雜症"
+tags: []
+content: '''
+  # 疑難雜症
+  ---
+  ## 1.找出佔用端口，並殺死它
+  ![00026.jpg](C:/Boostnoteimg/00044.jpg)
+  netstat -ano|findstr  "8081"
+  tasklist|findstr "1808"
+  taskkill /pid 1808 /F
+  
+  ---
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

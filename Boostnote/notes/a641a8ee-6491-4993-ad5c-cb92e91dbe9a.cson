@@ -1,0 +1,53 @@
+createdAt: "2019-05-03T03:38:03.689Z"
+updatedAt: "2019-05-03T03:44:43.020Z"
+type: "SNIPPET_NOTE"
+folder: "888163b6bb8ae21eaf80"
+title: "1.8方法1 code"
+tags: []
+description: "1.8方法1 code"
+snippets: [
+  {
+    linesHighlighted: []
+    name: "application.properties"
+    mode: "Properties files"
+    content: '''
+      book.name=測試傳遞參數
+      book.id=99999999
+      book.at=at參數${random.uuid}      //${random.uuid}指使用內建方法自動設定uuid
+      book.retest=${book.name},try it      //${book.name}指使用上方book.name=測試傳遞參數
+    '''
+  }
+  {
+    name: "contest.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest;
+      
+      import org.springframework.beans.factory.annotation.Value;
+      import org.springframework.stereotype.Controller;
+      import org.springframework.web.bind.annotation.GetMapping;
+      import org.springframework.web.bind.annotation.PathVariable;
+      import org.springframework.web.bind.annotation.ResponseBody;
+      
+      import java.util.HashMap;
+      import java.util.Map;
+      
+      @Controller
+      public class contest {
+        
+        @Value ("${book.name}")//標註在application.properties定義的參數book.name
+        public String bn;
+        @ResponseBody
+        @GetMapping("/book")
+        public String one() {
+         System.out.println(bn);
+          return bn;
+        }
+      }
+      
+    '''
+    linesHighlighted: []
+  }
+]
+isStarred: false
+isTrashed: false

@@ -1,0 +1,20 @@
+{
+  "folders": [
+    {
+      "key": "53cae16fc76a6a757354",
+      "color": "#1278BD",
+      "name": "Default"
+    },
+    {
+      "key": "36ef10a205c49c0cdc86",
+      "color": "#B013A4",
+      "name": "Ahua_Spring_Boot_Note"
+    },
+    {
+      "key": "888163b6bb8ae21eaf80",
+      "color": "#E8D252",
+      "name": "Sprint-boot+Hibernate JPA+Thymeleaf3"
+    }
+  ],
+  "version": "1.0"
+}

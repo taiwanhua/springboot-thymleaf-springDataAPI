@@ -1,0 +1,280 @@
+createdAt: "2019-05-07T17:50:28.269Z"
+updatedAt: "2019-05-07T17:56:42.754Z"
+type: "SNIPPET_NOTE"
+folder: "888163b6bb8ae21eaf80"
+title: "4.1.6 code"
+tags: []
+description: "4.1.6 code"
+snippets: [
+  {
+    linesHighlighted: []
+    name: "contest.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.web;
+      
+      import com.example.boottest.domin.Book;
+      import com.example.boottest.service.Bookservice;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.stereotype.Controller;
+      import org.springframework.ui.Model;
+      import org.springframework.web.bind.annotation.*;
+      
+      import java.util.List;
+      import java.util.Optional;
+      
+      @Controller
+      public class contest {
+        // Web層
+        @Autowired private Bookservice bookservice;
+      
+        @GetMapping("/thy")
+        public String s(Model model) {
+          List<Book> g = bookservice.findall();
+          model.addAttribute("c", g);
+          return "thymeleaftest";
+        }
+        @GetMapping("/newone")
+          public String newo(){
+            return "newone";
+        }
+        @PostMapping("/new")
+          public String n(Book book){//當from表單的input標籤下name欄位都對應到Book實體類時，會自動傳入實體類Book讓我們在java端取到值
+            bookservice.saveone(book);
+            return "redirect:/thy";    //重定向到上面/thy的GET Request
+        }
+      }
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "newone.html"
+    mode: "HTML"
+    content: '''
+      <!DOCTYPE html>
+      <html lang="en"
+            xmlns:th="http://www.w3.org/1999/xhtml">
+      <head>
+          <meta charset="UTF-8"/>
+          <meta http-equiv="X-UA-Compatible"
+                content="IE=edge">
+          <meta name="viewport"
+                content="width=device-width, initial-scale=1">
+          <title>Books</title>
+          <link th:href="@{/css/bootstrap.min.css}"
+                href="../static/css/bootstrap.min.css"
+                rel="stylesheet"/>
+      </head>
+      <body>
+      <div>
+        ////////////////////////////////input 裡的name一定要對應到Book實體類的欄位
+          <div th:class="'container'">
+              <form action="#" th:action="@{/new}" th:method="post">
+                  <div class="form-group">
+                      <label for="atn">at</label>
+                      <input type="text"
+                             name="at"
+                             id="atn"
+                             class="form-control">
+                  </div>
+                  <div class="form-group">
+                      <label for="namen">name</label>
+                      <input type="text"
+                             name="name"
+                             id="namen"
+                             class="form-control">
+                  </div>
+                  <div class="form-group">
+                      <label for="sexn">sex</label>
+                    ///////////////////////////////////////////option裡面的value才是真正上送的值，標籤之間是給USER看的
+                      <select name="sex" id="sexn" class="form-control">
+                          <option value="男">BOY</option>
+                          <option value="女">GIRL</option>
+                          <option value="陰陽人">BOYANDGIRL</option>
+                      </select>
+      
+                  </div>
+                  <div>
+                      <button type="submit">提交</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+      <script th:src="@{/js/bootstrap.min.js}"></script>
+      </body>
+      </html>
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "Bookservice.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.service;
+      
+      import com.example.boottest.domin.Book;
+      import com.example.boottest.domin.BookRepository;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.data.jpa.repository.Modifying;
+      import org.springframework.stereotype.Service;
+      import org.springframework.transaction.annotation.Transactional;
+      
+      import java.util.List;
+      import java.util.Optional;
+      
+      @Service
+      public class Bookservice {
+        // Service層
+        @Autowired private BookRepository bookRepository;
+      
+        public List<Book> findall() {
+          return bookRepository.findAll();
+        }
+        public Book saveone(Book book){
+            return bookRepository.save(book);
+        }
+      }
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "BookRepository.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.domin;
+      
+      import org.springframework.data.jpa.repository.JpaRepository;
+      import org.springframework.data.jpa.repository.Modifying;
+      import org.springframework.data.jpa.repository.Query;
+      import org.springframework.stereotype.Repository;
+      import org.springframework.transaction.annotation.Transactional;
+      
+      import java.util.List;
+      
+      public interface BookRepository extends JpaRepository<Book, Long> {
+        // interface(接口)層
+      
+      }
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "Book.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.domin;
+      
+      import org.springframework.boot.context.properties.ConfigurationProperties;
+      import org.springframework.stereotype.Component;
+      
+      import javax.persistence.Entity;
+      import javax.persistence.GeneratedValue;
+      import javax.persistence.GenerationType;
+      import javax.persistence.Id;
+      
+      @Entity
+      public class Book {
+        // 實體類
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        private Long id;
+      
+        String name;
+        String at;
+        String sex;
+      
+        public Book() {}
+      
+        public String getName() {
+          return name;
+        }
+      
+        public void setName(String name) {
+          this.name = name;
+        }
+      
+        public String getAt() {
+          return at;
+        }
+      
+        public void setAt(String at) {
+          this.at = at;
+        }
+      
+        public Long getId() {
+          return id;
+        }
+      
+        public void setId(Long id) {
+          this.id = id;
+        }
+      
+        public String getSex() {
+          return sex;
+        }
+      
+        public void setSex(String sex) {
+          this.sex = sex;
+        }
+      }
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "thymeleaftest.html"
+    mode: "HTML"
+    content: '''
+      <!DOCTYPE html>
+      <html lang="en"
+            xmlns:th="http://www.w3.org/1999/xhtml">
+      <head>
+          <meta charset="UTF-8"/>
+          <meta http-equiv="X-UA-Compatible"
+                content="IE=edge">
+          <meta name="viewport"
+                content="width=device-width, initial-scale=1">
+          <title>Books</title>
+          <link th:href="@{/css/bootstrap.min.css}"
+                href="../static/css/bootstrap.min.css"
+                rel="stylesheet"/>
+      </head>
+      <body>
+      <div>
+          <div th:class="container">
+              <div><a th:href="@{/newone}" th:class="'btn bg-primary'">新增一筆</a></div>
+              <!--            index：當前迭代索引，從0開始（零）-->
+              <!--            count：到目前為止處理的元素數-->
+              <!--            size：列表中元素的總數-->
+              <!--            偶數/奇數：檢查當前迭代索引是偶數還是奇數-->
+              <!--            first：檢查當前迭代是否是第一個迭代-->
+              <!--            last：檢查當前迭代是否是最後一次迭代-->
+              <table th:class="'table table-hover'">
+                  <tr th:each="f,iter:${c}" th:class="${iter.count}%2==1? 'bg-success'">
+                      <td th:text="${f.id}"></td>
+                      <td th:text="${f.at}"></td>
+                      <td th:text="${f.name}"></td>
+                      <td th:switch="${f.sex}">
+                          <span th:case="男">BOY</span>
+                          <span th:case="女">GIRL</span>
+                          <span th:case="陰陽人">BOY AND GIRL</span>
+                      </td>
+                  </tr>
+              </table>
+          </div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+      <script th:src="@{/js/bootstrap.min.js}"></script>
+      </body>
+      </html>
+      
+    '''
+  }
+]
+isStarred: false
+isTrashed: false

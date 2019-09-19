@@ -1,0 +1,141 @@
+createdAt: "2019-04-05T11:27:42.139Z"
+updatedAt: "2019-04-05T13:58:06.425Z"
+type: "SNIPPET_NOTE"
+folder: "36ef10a205c49c0cdc86"
+title: "@Controller標註使用java方法"
+tags: []
+description: "@Controller標註使用java方法"
+snippets: [
+  {
+    linesHighlighted: []
+    name: "hello.java"
+    mode: "Java"
+    content: '''
+      package com.ahua.springdemo.web;
+      
+      import org.springframework.stereotype.Controller;
+      import org.springframework.web.bind.annotation.*;
+      
+      import java.util.HashMap;
+      import java.util.Map;
+      
+      @Controller
+      @RequestMapping("/api")
+      public class Hello {
+          //(http://127.0.0.1:8080/api/books)
+          @GetMapping("/books")
+          @ResponseBody//註解此列則為使用books.html配置
+          public Map getAll() {
+              Map<String, Object> bookmap = new HashMap<>();
+              bookmap.put("name", "anna");
+              bookmap.put("age", 11);
+              return bookmap;
+          }
+      //     並修改方法 getAll為以下(使用books.html配置)
+      //     public String getAll() {
+      //        return "books";
+      //    }
+      
+        
+        
+      }
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "pom.xml"
+    mode: "XML"
+    content: '''
+      <!--引入Maven依賴>
+      <!--引入Maven依賴>
+      <!--引入Maven依賴>
+      <!--引入Maven依賴>
+      
+      <?xml version="1.0" encoding="UTF-8"?>
+      <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+          <modelVersion>4.0.0</modelVersion>
+          <parent>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-parent</artifactId>
+              <version>2.1.4.RELEASE</version>
+              <relativePath/> <!-- lookup parent from repository -->
+          </parent>
+          <groupId>com.ahua</groupId>
+          <artifactId>springdemo</artifactId>
+          <version>0.0.1-SNAPSHOT</version>
+          <name>springdemo</name>
+          <description>Demo project for Spring Boot</description>
+      
+          <properties>
+              <java.version>11</java.version>
+          </properties>
+      
+          <dependencies>
+              <dependency>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-starter-web</artifactId>
+              </dependency>
+      
+              <dependency>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-starter-test</artifactId>
+                  <scope>test</scope>
+              </dependency>
+              <dependency>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-starter-thymeleaf</artifactId>
+              </dependency>
+          </dependencies>
+      
+          <build>
+              <plugins>
+                  <plugin>
+                      <groupId>org.springframework.boot</groupId>
+                      <artifactId>spring-boot-maven-plugin</artifactId>
+                  </plugin>
+              </plugins>
+          </build>
+      
+      </project>
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "books.html"
+    mode: "HTML"
+    content: '''
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8" />
+          <title>Books</title>
+      </head>
+      <body>
+      <h1>hi my books</h1>
+      </body>
+      </html>
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "book.html"
+    mode: "HTML"
+    content: '''
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8" />
+          <title>book</title>
+      </head>
+      <body>
+      <h2>sssss</h2>
+      </body>
+      </html>
+    '''
+  }
+]
+isStarred: false
+isTrashed: false

@@ -1,0 +1,41 @@
+createdAt: "2019-05-04T07:52:06.310Z"
+updatedAt: "2019-05-04T08:07:16.608Z"
+type: "SNIPPET_NOTE"
+folder: "888163b6bb8ae21eaf80"
+title: "1.12 code"
+tags: []
+description: "1.12 code"
+snippets: [
+  {
+    linesHighlighted: []
+    name: "hi.html"
+    mode: "HTML"
+    content: '''
+      <!DOCTYPE html>
+      <html lang="en"
+            xmlns:th="http://www.w3.org/1999/xhtml"
+            xmlns:https="http://www.w3.org/1999/xhtml">
+      <head>
+          <meta charset="UTF-8"/>
+          <meta http-equiv="X-UA-Compatible"
+                content="IE=edge">
+          <meta name="viewport"
+                content="width=device-width, initial-scale=1">
+          <title>Books</title>
+          <link th:href="@{/css/bootstrap.min.css}"
+                href="../static/css/bootstrap.min.css"
+                rel="stylesheet"/>
+      </head>
+      <body>
+      <div class="alert alert-success">開喔
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+      <script th:src="@{/js/bootstrap.min.js}"></script>
+      </body>
+      </html>
+      ////////////////////////////////////載入資源要不斷刷新，有時候IDEA沒吃到檔案改變
+    '''
+  }
+]
+isStarred: false
+isTrashed: false

@@ -1,0 +1,25 @@
+createdAt: "2019-04-07T07:47:56.407Z"
+updatedAt: "2019-04-07T08:45:36.886Z"
+type: "SNIPPET_NOTE"
+folder: "36ef10a205c49c0cdc86"
+title: "application.properties"
+tags: []
+description: "application.properties"
+snippets: [
+  {
+    linesHighlighted: []
+    name: "application.properties"
+    mode: "Properties files"
+    content: '''
+      server.port=8082
+      server.servlet.context-path=/path
+      logging.level.root=WARN
+      logging.level.com.ahua.springdemo=Debug
+      #logging.pattern.file=%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}
+      logging.file=log/mylog
+      
+    '''
+  }
+]
+isStarred: false
+isTrashed: false

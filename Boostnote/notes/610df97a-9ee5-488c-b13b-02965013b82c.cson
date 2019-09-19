@@ -1,0 +1,259 @@
+createdAt: "2019-04-05T10:48:13.481Z"
+updatedAt: "2019-04-29T06:18:33.703Z"
+type: "MARKDOWN_NOTE"
+folder: "53cae16fc76a6a757354"
+title: "Welcome to Boostnote!"
+content: '''
+  # Welcome to Boostnote!
+  ## Click here to edit markdown :wave:
+  
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/L0qNPLsvmyM" frameborder="0" allowfullscreen></iframe>
+  
+  ## Docs :memo:
+  - [Boostnote | Boost your happiness, productivity and creativity.](https://hackernoon.com/boostnote-boost-your-happiness-productivity-and-creativity-315034efeebe)
+  - [Cloud Syncing & Backups](https://github.com/BoostIO/Boostnote/wiki/Cloud-Syncing-and-Backup)
+  - [How to sync your data across Desktop and Mobile apps](https://github.com/BoostIO/Boostnote/wiki/Sync-Data-Across-Desktop-and-Mobile-apps)
+  - [Convert data from **Evernote** to Boostnote.](https://github.com/BoostIO/Boostnote/wiki/Evernote)
+  - [Keyboard Shortcuts](https://github.com/BoostIO/Boostnote/wiki/Keyboard-Shortcuts)
+  - [Keymaps in Editor mode](https://github.com/BoostIO/Boostnote/wiki/Keymaps-in-Editor-mode)
+  - [How to set syntax highlight in Snippet note](https://github.com/BoostIO/Boostnote/wiki/Syntax-Highlighting)
+  
+  ---
+  
+  ## Article Archive :books:
+  - [Reddit English](http://bit.ly/2mOJPu7)
+  - [Reddit Spanish](https://www.reddit.com/r/boostnote_es/)
+  - [Reddit Chinese](https://www.reddit.com/r/boostnote_cn/)
+  - [Reddit Japanese](https://www.reddit.com/r/boostnote_jp/)
+  
+  ---
+  
+  ## Community :beers:
+  - [GitHub](http://bit.ly/2AWWzkD)
+  - [Twitter](http://bit.ly/2z8BUJZ)
+  - [Facebook Group](http://bit.ly/2jcca8t)
+  
+  :
+  [跳列](:line:1)
+  [MarkDown常用語法總結（含github，boostnote，stackedit編輯器語法的細微差別） - 台部落](https://www.twblogs.net/a/5c1f5397bd9eee16b3da8e79)
+  document
+  [PDF export · BoostIO/Boostnote Wiki · GitHub](https://github.com/BoostIO/Boostnote/wiki/PDF-export)
+  [Boostnote Markdown Example · GitHub](https://gist.github.com/TobseF/a23cab6964226e26310a047a3189c8b1)
+  
+  ## Hello
+  print('hello')
+  [TOP](#TOP)
+  
+  # TOP
+  [Hello](#Hello)
+  [Hello World](#Hello-World)
+  
+  
+  
+  ```flowchart
+  st=>start: Start:>http://www.google.com[blank]
+  e=>end:>http://www.google.com
+  op1=>operation: My Operation
+  sub1=>subroutine: My Subroutine
+  cond=>condition: Yes or No?:>http://www.google.com
+  io=>inputoutput: catch something...
+  test=>inputoutput: test
+  
+  st->op1->cond
+  cond(yes)->io->e
+  cond(no)->sub1(right)->op1
+  
+  
+  ```
+  ===================================
+  ```sequence
+  Title: Here is a title
+  A->B: Normal line
+  B-->C: Dashed line
+  D-->>A: Dashed open arrow
+  C->>D: Open arrow
+  
+  ```
+  =================================
+  @startuml
+  actor actor 
+  agent agent
+  artifact artifact
+  boundary boundary
+  card card
+  cloud cloud
+  component component
+  control control
+  database database
+  entity entity
+  file file
+  folder folder
+  frame frame
+  interface  interface
+  node node
+  package package
+  queue queue
+  stack stack
+  rectangle rectangle
+  storage storage
+  usecase usecase
+  @enduml
+  
+  =================================
+  ```bash
+  [ Boostnote 10:01 ]% tree
+  .
+  ├── boostnote.json
+  ├── images
+  │   ├── ay1wuf9yhw0wl8fr.png
+  │   ├── qppsh9gs44nghkt9.png
+  │   └── 44yt208ehhcnxw29.png
+  └── notes
+      ├── 01f720cbd38f6079e7cd.cson
+      ├── 0391ce9b4b6bf0ae8cb7.cson
+      ├── 2b7d62d24dea826d8b86.cson
+      ├── 304a604e620fe29efc0e.cson
+      ├── b9c22f55de5747604fd8.cson
+      ├── d9416376efecccfbfd36.cson
+      └── f7780965124b6d8b8e9e.cson
+  
+  2 directories, 11 files
+  ```
+  
+  =================================
+  {
+    "folders": [
+      {
+        "key": "49e4ebf9f16ddfc96534",
+        "color": "#E10051",
+        "name": "Tutorial"
+      },
+      {
+        "key": "1de44c2b39b9288e7968",
+        "color": "#2BA5F7",
+        "name": "aaaaa"
+      }
+    ],
+    "version": "1.0"
+  }
+  
+  !!! note Note Lorem ipsum !!!
+  
+  加入  !!!就會結尾note Note Lorem ipsum 
+  
+  
+  ## Table
+  | Tables        | Are           | Cool  |
+  | ------------- |:-------------:| -----:|
+  | col 3 is      | right-aligned | $1600 |
+  | col 2 is      | centered      |   $12 |
+  | zebra stripes | are neat      |    $1 |
+  
+  There must be at least 3 dashes separating each header cell.
+  The outer pipes (|) are optional, and you don't need to make the 
+  raw Markdown line up prettily. You can also use inline Markdown.
+  
+  Markdown | Less | Pretty
+  --- | --- | ---
+  *Still* | `renders` | **nicely**
+  1 | 2 | 3
+  
+  !!!
+  ==============================================
+  [Markdown里面使用mermaid画流程图（基础） - 背对星星和月亮 - CSDN博客](https://blog.csdn.net/Subson/article/details/78054689)
+  
+  
+  B[bname]
+  C(cname)
+  D((dname))
+  E>ename]
+  F{fname}
+  ```mermaid
+  graph TB
+  B[bname]
+  C(cname)
+  D((dname))
+  E>ename]
+  F{fname}
+  A-->B
+  A-->C
+  A--no-->D
+  D--yes-->A
+  B-->E
+  C-->F
+  F--no-->A
+  
+  ```
+  
+  
+  <code>tell application "Foo"
+      beep
+  end tell
+  </code>
+  <red>This is a par1agraph
+  <blue>asdasd
+  <span  markdown="1"  class="dredbg">asdff<dredbg>fasfasd<br>asd
+  </dredbg>sdv</div>
+  
+  >[!NOTE] 
+  >This is a NOTEa
+  
+  > [!WARNING]
+  > This is a WARNING
+  
+  > [!TIP]
+  > This is a TIP
+  
+  > [!IMPORTANT]
+  > This is IMPORTANT
+  
+  ```mermaid
+  graph LR
+  sb[spring-boot]
+  hj[hibernate JPA]
+  h1[JPA內建方法]
+  h2[使用JPQL訪問]
+  h3[使用SQL Query訪問]
+  h4[JPA事務]
+  thy[thymeleaf]
+  thyc[th標籤搭配Controller]
+  res[Request]
+  restc["@"RestController]
+  c["@"Controller]
+  
+  classDef r fill:#f66,stroke:#333,stroke-width:4px,font-size:30px,height:60px,text-align:center,line-height:30px;
+  classDef g fill:#33FF33,stroke:#333,stroke-width:4px,font-size:30px,height:60px,text-align:center,line-height:30px;
+  classDef g2 fill:#33FF33,stroke:#333,stroke-width:4px,font-size:30px,height:100px,text-align:center,line-height:40px;
+  classDef b fill:#0066FF,stroke:#333,stroke-width:4px,font-size:30px,height:60px,text-align:center,line-height:30px;
+  classDef brl fill:#FF8888,stroke:#880000,stroke-width:2px,stroke-dasharray:5,font-size:30px,height:60px,text-align:center,line-height:30px;
+  classDef sub fill:#33FF33,stroke:#333,stroke-width:4px,font-size:50px,height:800px,text-align:center,line-height:50px;
+  class res,hj g
+  class sb r
+  class withthy brl
+  class c,restc,thyc,h1,h2,h3,h4 b
+  class thy g2
+  class thysub sub
+  
+  sb-->hj
+  hj-->h1
+  hj-->h2
+  hj-->h3
+  hj-->h4
+  sb-->thy
+  thy-->thyc
+  sb-->res
+  res-->c
+  res-->restc
+  
+  
+  
+  ```
+  
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false
+linesHighlighted: [
+  50
+]

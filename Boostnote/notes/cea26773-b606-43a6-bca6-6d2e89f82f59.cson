@@ -1,0 +1,75 @@
+createdAt: "2019-04-07T08:42:02.054Z"
+updatedAt: "2019-04-07T08:45:56.791Z"
+type: "SNIPPET_NOTE"
+folder: "36ef10a205c49c0cdc86"
+title: "application.properties自訂義參數調用(@Value(\"${name}\")標籤)"
+tags: []
+description: "application.properties自訂義參數調用(@Value(\"${name}\")標籤)"
+snippets: [
+  {
+    linesHighlighted: []
+    name: "Hello.java"
+    mode: "Java"
+    content: '''
+      [](http://127.0.0.1:8082/path/api/book?size=7&a=9)
+      package com.ahua.springdemo.web;
+      
+      import org.springframework.beans.factory.annotation.Value;
+      import org.springframework.stereotype.Controller;
+      import org.springframework.web.bind.annotation.*;
+      
+      import java.util.ArrayList;
+      import java.util.HashMap;
+      import java.util.List;
+      import java.util.Map;
+      
+      //@Controller
+      @RestController
+      @RequestMapping("/api")
+      public class Hello {
+          @Value("${book.name}")//標註在application.properties定義的參數book.name
+          public String b;//定義為b
+          @GetMapping("/book")
+          public Object All(@RequestParam int size, @RequestParam(defaultValue ="0") int page) {
+              //如同PathVariable若無指定名稱，那就得保證網址列傳入的參數等同這裡設定的參數名
+              Map<String, Object> book1 = new HashMap<>();
+              book1.put("name", b);//使用在application.properties定義的參數book.name
+              book1.put("id", "00001");
+              book1.put("at", "王XX");
+              Map<String, Object> book2 = new HashMap<>();
+              book2.put("name", "第二本");
+              book2.put("id", "00002");
+              book2.put("at", "林XX");
+              Map<String, Object> book3 = new HashMap<>();
+              book3.put("name", "第三本");
+              book3.put("id", "00003");
+              book3.put("at", "陳XX");
+              List<Map> booklist = new ArrayList<>();
+              booklist.add(book1);
+              booklist.add(book2);
+              booklist.add(book3);
+              System.out.println("-------------size:" + size);
+              return booklist.get(page);
+          }
+      }
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "application.properties"
+    mode: "Properties files"
+    content: '''
+      server.port=8082
+      server.servlet.context-path=/path
+      logging.level.root=WARN
+      logging.level.com.ahua.springdemo=Debug
+      logging.file=log/mylog
+      spring.http.encoding.charset=UTF-8   
+      server.tomcat.uri-encoding=UTF-8
+      book.name=測試傳遞參數
+    '''
+  }
+]
+isStarred: false
+isTrashed: false

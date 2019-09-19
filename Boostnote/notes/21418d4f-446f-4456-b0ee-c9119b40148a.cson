@@ -1,0 +1,57 @@
+createdAt: "2019-05-04T06:38:00.644Z"
+updatedAt: "2019-05-04T06:40:37.835Z"
+type: "SNIPPET_NOTE"
+folder: "888163b6bb8ae21eaf80"
+title: "2.3 方法2 code"
+tags: []
+description: "2.3 方法2 code "
+snippets: [
+  {
+    linesHighlighted: []
+    name: "contest.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.web;
+      
+      import com.example.boottest.domin.Book;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.stereotype.Controller;
+      import org.springframework.ui.Model;
+      import org.springframework.web.bind.annotation.*;
+      
+      @Controller
+      public class contest {
+      
+        @GetMapping("/s/{id}")
+        @ResponseBody
+        public String one(@PathVariable int id) {
+          
+          return String.valueOf(id);
+        }
+      }
+      
+      /////////////////////////////////////////以下補充以不同的參數名字做傳值
+      package com.example.boottest.web;
+      
+      import com.example.boottest.domin.Book;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.stereotype.Controller;
+      import org.springframework.ui.Model;
+      import org.springframework.web.bind.annotation.*;
+      
+      @Controller
+      public class contest {
+      
+        @GetMapping("/s/{iid}")
+        @ResponseBody
+        public String one(@PathVariable("iid") int id) {
+          
+          return String.valueOf(id);
+        }
+      }
+      
+    '''
+  }
+]
+isStarred: false
+isTrashed: false

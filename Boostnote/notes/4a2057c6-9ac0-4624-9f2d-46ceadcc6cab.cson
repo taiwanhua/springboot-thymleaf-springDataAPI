@@ -1,0 +1,210 @@
+createdAt: "2019-05-07T08:54:53.264Z"
+updatedAt: "2019-05-07T08:56:29.396Z"
+type: "SNIPPET_NOTE"
+folder: "888163b6bb8ae21eaf80"
+title: "4.1.4 code"
+tags: []
+description: "4.1.4 code"
+snippets: [
+  {
+    linesHighlighted: []
+    name: "contest.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.web;
+      
+      import com.example.boottest.domin.Book;
+      import com.example.boottest.service.Bookservice;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.stereotype.Controller;
+      import org.springframework.ui.Model;
+      import org.springframework.web.bind.annotation.*;
+      
+      import java.util.List;
+      import java.util.Optional;
+      
+      @Controller
+      public class contest {
+        // Web層
+        @Autowired private Bookservice bookservice;
+      
+        @GetMapping("/thy")
+        public String s(Model model) {
+          List<Book> g = bookservice.findall();
+          model.addAttribute("c", g);
+          return "thymeleaftest";
+        }
+      }
+      
+    '''
+  }
+  {
+    name: "thymeleaftest.html"
+    mode: "HTML"
+    content: '''
+      <!DOCTYPE html>
+      <html lang="en"
+            xmlns:th="http://www.w3.org/1999/xhtml">
+      <head>
+          <meta charset="UTF-8"/>
+          <meta http-equiv="X-UA-Compatible"
+                content="IE=edge">
+          <meta name="viewport"
+                content="width=device-width, initial-scale=1">
+          <title>Books</title>
+          <link th:href="@{/css/bootstrap.min.css}"
+                href="../static/css/bootstrap.min.css"
+                rel="stylesheet"/>
+      </head>
+      <body>
+      <div>
+          <!--            index：當前迭代索引，從0開始（零）-->
+          <!--            count：到目前為止處理的元素數-->
+          <!--            size：列表中元素的總數-->
+          <!--            偶數/奇數：檢查當前迭代索引是偶數還是奇數-->
+          <!--            first：檢查當前迭代是否是第一個迭代-->
+          <!--            last：檢查當前迭代是否是最後一次迭代-->
+          <table th:class="'table table-hover'">
+              <tr th:each="f,iter:${c}" th:class="${iter.count}%2==1? 'bg-success'">
+                  <td th:text="${f.id}"></td>
+                  <td th:text="${f.at}"></td>
+                  <td th:text="${f.name}"></td>
+                  <td th:switch="${f.sex}">
+                      <span th:case="男">BOY</span>
+                      <span th:case="女">GIRL</span>
+                      <span th:case="陰陽人">BOY AND GIRL</span>
+                  </td>
+              </tr>
+          </table>
+          <div th:each="f,iter:${c}">
+              <div th:if="${iter.size}%2==1 AND ${iter.last} " class="bg-success" th:text="共+${iter.size}+為奇數筆">奇數筆</div>
+              <div th:unless="${iter.size}%2==0 AND !${iter.last} " class="bg-success" th:text="共+${iter.size}+為奇數筆，unless判斷不為偶數">奇數筆</div>
+              <div th:if="${iter.size}%2==0 AND ${iter.last} " class="bg-success" th:text="共+${iter.size}+為偶數筆">偶數筆</div>
+              <div th:unless="${iter.size}%2==1 AND !${iter.last} " class="bg-success" th:text="共+${iter.size}+為偶數筆，unless判斷不為奇數">奇數筆</div>
+          </div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+      <script th:src="@{/js/bootstrap.min.js}"></script>
+      </body>
+      </html>
+      
+    '''
+    linesHighlighted: []
+  }
+  {
+    name: "BookRepository.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.domin;
+      
+      import org.springframework.data.jpa.repository.JpaRepository;
+      import org.springframework.data.jpa.repository.Modifying;
+      import org.springframework.data.jpa.repository.Query;
+      import org.springframework.stereotype.Repository;
+      import org.springframework.transaction.annotation.Transactional;
+      
+      import java.util.List;
+      
+      public interface BookRepository extends JpaRepository<Book, Long> {
+        // interface(接口)層
+      
+      }
+      
+    '''
+    linesHighlighted: []
+  }
+  {
+    name: "Book.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.domin;
+      
+      import org.springframework.boot.context.properties.ConfigurationProperties;
+      import org.springframework.stereotype.Component;
+      
+      import javax.persistence.Entity;
+      import javax.persistence.GeneratedValue;
+      import javax.persistence.GenerationType;
+      import javax.persistence.Id;
+      
+      @Entity
+      public class Book {
+        // 實體類
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        private Long id;
+      
+        String name;
+        String at;
+        String sex;
+      
+        public Book() {}
+      
+        public String getName() {
+          return name;
+        }
+      
+        public void setName(String name) {
+          this.name = name;
+        }
+      
+        public String getAt() {
+          return at;
+        }
+      
+        public void setAt(String at) {
+          this.at = at;
+        }
+      
+        public Long getId() {
+          return id;
+        }
+      
+        public void setId(Long id) {
+          this.id = id;
+        }
+      
+        public String getSex() {
+          return sex;
+        }
+      
+        public void setSex(String sex) {
+          this.sex = sex;
+        }
+      }
+      
+    '''
+    linesHighlighted: []
+  }
+  {
+    name: "Bookservice.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.service;
+      
+      import com.example.boottest.domin.Book;
+      import com.example.boottest.domin.BookRepository;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.data.jpa.repository.Modifying;
+      import org.springframework.stereotype.Service;
+      import org.springframework.transaction.annotation.Transactional;
+      
+      import java.util.List;
+      import java.util.Optional;
+      
+      @Service
+      public class Bookservice {
+        // Service層
+        @Autowired private BookRepository bookRepository;
+      
+        public List<Book> findall() {
+          return bookRepository.findAll();
+        }
+      }
+      
+    '''
+    linesHighlighted: []
+  }
+]
+isStarred: false
+isTrashed: false

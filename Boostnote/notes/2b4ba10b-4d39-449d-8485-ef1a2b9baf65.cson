@@ -1,0 +1,185 @@
+createdAt: "2019-05-08T16:58:31.215Z"
+updatedAt: "2019-05-08T17:05:22.670Z"
+type: "SNIPPET_NOTE"
+folder: "888163b6bb8ae21eaf80"
+title: "3.6 code"
+tags: []
+description: "3.6 code"
+snippets: [
+  {
+    name: "contest.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.web;
+      
+      import com.example.boottest.domin.Book;
+      import com.example.boottest.service.Bookservice;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.data.domain.Page;
+      import org.springframework.data.domain.PageRequest;
+      import org.springframework.data.domain.Pageable;
+      import org.springframework.data.domain.Sort;
+      import org.springframework.data.web.PageableDefault;
+      import org.springframework.stereotype.Controller;
+      import org.springframework.ui.Model;
+      import org.springframework.web.bind.annotation.*;
+      import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+      
+      import java.util.List;
+      import java.util.Optional;
+      
+      @Controller
+      public class contest {
+        // Web層
+        @Autowired private Bookservice bookservice;
+      
+        @GetMapping("/page")
+        public String page(
+            @PageableDefault(size = 5, sort = "id", direction = Sort.Direction.ASC) Pageable pageable,
+            Model model) {
+      
+          Page<Book> c = bookservice.findbypage(pageable);
+          model.addAttribute("g", c);
+      
+          return "page";
+        }
+        
+         
+        /////////////////////////////////  以下為不使用 @PageableDefault標註時設置
+        //    @GetMapping("/page")
+        //    public String page(@RequestParam(defaultValue ="0") int page ,@RequestParam(defaultValue =
+        // "5") int size,Model model){
+        //      Pageable pageable=PageRequest.of(page,size,Sort.by("id").ascending());
+        //      Page<Book> c=bookservice.findbypage(pageable);
+        //      model.addAttribute("g",c);
+        //
+        //      return "page";
+        //    }
+      }
+      
+    '''
+    linesHighlighted: []
+  }
+  {
+    name: "page.html"
+    mode: "HTML"
+    content: '''
+      <!DOCTYPE html>
+      <html lang="en"
+            xmlns:th="http://www.w3.org/1999/xhtml">
+      <head>
+          <meta charset="UTF-8"/>
+          <meta http-equiv="X-UA-Compatible"
+                content="IE=edge">
+          <meta name="viewport"
+                content="width=device-width, initial-scale=1">
+          <title>Books</title>
+          <link th:href="@{/css/bootstrap.min.css}"
+                href="../static/css/bootstrap.min.css"
+                rel="stylesheet"/>
+      </head>
+      <body>
+      <div>
+          <div th:class="container">
+              <div><a th:href="@{/newone}" th:class="'btn bg-primary'">新增一筆</a></div>
+              <!--            index：當前迭代索引，從0開始（零）-->
+              <!--            count：到目前為止處理的元素數-->
+              <!--            size：列表中元素的總數-->
+              <!--            偶數/奇數：檢查當前迭代索引是偶數還是奇數-->
+              <!--            first：檢查當前迭代是否是第一個迭代-->
+              <!--            last：檢查當前迭代是否是最後一次迭代-->
+              <table th:class="'table table-hover'">
+                  <tr th:each="f,iter:${g.content}" th:class="${iter.count}%2==1? 'bg-success'">
+                      <td th:text="${f.id}"></td>
+                      <td th:text="${f.at}"></td>
+                      <td th:text="${f.name}"></td>
+                      <td th:switch="${f.sex}">
+                          <span th:case="男">BOY</span>
+                          <span th:case="女">GIRL</span>
+                          <span th:case="陰陽人">BOY AND GIRL</span>
+                      </td>
+                      <td><a th:text="修改" th:href="@{/modify/{id}(id=${f.id})}"></a></td>
+                  </tr>
+              </table>
+              <nav>
+                  <ul class="pager" th:object="${g}">
+                      <li  class="previous" th:unless="${g.number}==0"> <a th:href="@{'page?page='+${g.number-1}}">上一頁</a></li>
+                      <li class="next" th:unless="${g.number+1}==${g.totalPages}"><a th:href="@{'page?page='+${g.number+1}}">下一頁</a></li>
+                  </ul>
+              </nav>
+          </div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+      <script th:src="@{/js/bootstrap.min.js}"></script>
+      </body>
+      </html>
+      
+    '''
+    linesHighlighted: []
+  }
+  {
+    name: "Bookservice.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.service;
+      
+      import com.example.boottest.domin.Book;
+      import com.example.boottest.domin.BookRepository;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.data.domain.Page;
+      import org.springframework.data.domain.PageRequest;
+      import org.springframework.data.domain.Pageable;
+      import org.springframework.data.domain.Sort;
+      import org.springframework.data.jpa.repository.Modifying;
+      import org.springframework.stereotype.Service;
+      import org.springframework.transaction.annotation.Transactional;
+      
+      import java.util.List;
+      import java.util.Optional;
+      
+      @Service
+      public class Bookservice {
+        // Service層
+        @Autowired private BookRepository bookRepository;
+      
+          ///////////////////分頁
+          public Page<Book> findbypage(Pageable pageable){
+              return bookRepository.findAll(pageable);
+          }
+      }
+      
+    '''
+    linesHighlighted: []
+  }
+  {
+    name: "BookRepository.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.domin;
+      
+      import org.springframework.data.domain.Page;
+      import org.springframework.data.domain.Pageable;
+      import org.springframework.data.jpa.repository.JpaRepository;
+      import org.springframework.data.jpa.repository.Modifying;
+      import org.springframework.data.jpa.repository.Query;
+      import org.springframework.stereotype.Repository;
+      import org.springframework.transaction.annotation.Transactional;
+      
+      import java.util.List;
+      
+      public interface BookRepository extends JpaRepository<Book, Long> {
+        // interface(接口)層
+      
+          Page<Book> findAll(Pageable pageable);
+        
+        
+        /////////////////混合使用
+        //  List<Book> findById(Long id,Pageable pageable)
+      }
+      
+    '''
+    linesHighlighted: []
+  }
+]
+isStarred: false
+isTrashed: false

@@ -1,0 +1,214 @@
+createdAt: "2019-04-15T17:39:17.507Z"
+updatedAt: "2019-04-25T02:52:02.909Z"
+type: "SNIPPET_NOTE"
+folder: "36ef10a205c49c0cdc86"
+title: "JPA引入配置，接MariaDB"
+tags: []
+description: '''
+  JPA引入配置，接MariaDB
+  (若只做以下配置，則只會增加一個book table，並不能操作數據庫)
+'''
+snippets: [
+  {
+    linesHighlighted: []
+    name: "application.yml"
+    mode: "YAML"
+    content: '''
+      #這個application.yml 是預設會走進來，在此指定要使用的配置檔部分名稱，則會跳轉使用指定之檔案
+      spring:
+        profiles:
+          active: uat
+      
+      logging:
+        level:
+          root: WARN
+          com:
+            ahua:
+              springdemo: Debug
+        file: log/mylog
+      book:
+        name: 測試參數
+        id: 77777
+        at: at參數${random.uuid}
+        retest: ${book.name},try it
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "application-uat.yml"
+    mode: "YAML"
+    content: '''
+      server:
+        port: 8081
+        servlet:
+          context-path: /path
+      logging:
+        level:
+          root: WARN
+          com:
+            ahua:
+              springdemo: Debug
+        file: log/mylog
+      book:
+        name: 測試參數UAT
+        number: 77777
+        at: at參數${random.uuid}
+        retest: ${book.name},try it
+      spring:
+        datasource:
+          driver-class-name: org.mariadb.jdbc.Driver
+          url: jdbc:mariadb://220.135.152.185:3306/book?useUnicode=true&characterEncoding=utf-8
+          username: fansofcheer
+          password: cheerstyle
+        jpa:
+          hibernate:
+            ddl-auto: create
+          show-sql: true
+      
+      
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "Book.java"
+    mode: "Java"
+    content: '''
+      package com.ahua.springdemo.domain;
+      
+      import org.hibernate.annotations.ValueGenerationType;
+      import org.springframework.boot.context.properties.ConfigurationProperties;
+      import org.springframework.stereotype.Component;
+      
+      import javax.persistence.Entity;
+      import javax.persistence.GeneratedValue;
+      import javax.persistence.GenerationType;
+      import javax.persistence.Id;
+      
+      @Entity
+      public class Book {
+      
+          @Id
+          @GeneratedValue(strategy = GenerationType.AUTO)
+          long id;
+      
+          String name;
+      
+          String number;
+      
+          String at;
+      
+          String retest;
+      
+          public Book() {
+          }
+      
+          public long getId() {
+              return id;
+          }
+      
+          public void setId(long id) {
+              this.id = id;
+          }
+      
+          public String getName() {
+              return name;
+          }
+      
+          public void setName(String name) {
+              this.name = name;
+          }
+      
+          public String getNumber() {
+              return number;
+          }
+      
+          public void setNumber(String number) {
+              this.number = number;
+          }
+      
+          public String getAt() {
+              return at;
+          }
+      
+          public void setAt(String at) {
+              this.at = at;
+          }
+      
+          public String getRetest() {
+              return retest;
+          }
+      
+          public void setRetest(String retest) {
+              this.retest = retest;
+          }
+      }
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "pom.xml"
+    mode: "XML"
+    content: '''
+      <?xml version="1.0" encoding="UTF-8"?>
+      <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+          <modelVersion>4.0.0</modelVersion>
+          <parent>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-parent</artifactId>
+              <version>2.1.4.RELEASE</version>
+              <relativePath/> <!-- lookup parent from repository -->
+          </parent>
+          <groupId>com.ahua</groupId>
+          <artifactId>springdemo</artifactId>
+          <version>0.0.1-SNAPSHOT</version>
+          <name>springdemo</name>
+          <description>Demo project for Spring Boot</description>
+      
+          <properties>
+              <java.version>11</java.version>
+          </properties>
+      
+          <dependencies>
+              <dependency>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-starter-web</artifactId>
+              </dependency>
+      
+              <dependency>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-starter-test</artifactId>
+                  <scope>test</scope>
+              </dependency>
+              <dependency>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-starter-thymeleaf</artifactId>
+              </dependency>
+              <dependency>
+                  <groupId>org.mariadb.jdbc</groupId>
+                  <artifactId>mariadb-java-client</artifactId>
+              </dependency>
+              <dependency>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-starter-data-jpa</artifactId>
+              </dependency>
+          </dependencies>
+          <build>
+              <plugins>
+                  <plugin>
+                      <groupId>org.springframework.boot</groupId>
+                      <artifactId>spring-boot-maven-plugin</artifactId>
+                  </plugin>
+              </plugins>
+          </build>
+      
+      </project>
+      
+    '''
+  }
+]
+isStarred: false
+isTrashed: false

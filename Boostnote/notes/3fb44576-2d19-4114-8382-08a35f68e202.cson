@@ -1,0 +1,32 @@
+createdAt: "2019-05-03T16:50:12.892Z"
+updatedAt: "2019-05-03T16:52:00.622Z"
+type: "SNIPPET_NOTE"
+folder: "888163b6bb8ae21eaf80"
+title: "1.9 code"
+tags: []
+description: "1.9 code"
+snippets: [
+  {
+    linesHighlighted: []
+    name: "application.yml"
+    mode: "YAML"
+    content: '''
+      #配置寫法完全與application.properties相同，只是變成階層式
+      logging:
+        level:
+          root: WARN
+          com:
+            ahua:
+              springdemo: Debug
+        file: log/mylog
+      book:
+        name: 測試參數
+        id: 77777
+        at: at參數${random.uuid}
+        retest: ${book.name},try it
+      
+    '''
+  }
+]
+isStarred: false
+isTrashed: false

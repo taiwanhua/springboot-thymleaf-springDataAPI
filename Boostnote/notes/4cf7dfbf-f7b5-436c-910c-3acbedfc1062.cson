@@ -1,0 +1,119 @@
+createdAt: "2019-04-06T15:10:04.898Z"
+updatedAt: "2019-04-06T23:04:41.678Z"
+type: "SNIPPET_NOTE"
+folder: "36ef10a205c49c0cdc86"
+title: "@RestController標註傳遞參數GET方法@PathVariable"
+tags: []
+description: " @RestController標註傳遞參數GET方法@PathVariable"
+snippets: [
+  {
+    linesHighlighted: []
+    name: "Hello.java"
+    mode: "Java"
+    content: '''
+      //傳送一個參數(http://127.0.0.1:8080/api/book/9)
+      package com.ahua.springdemo.web;
+      
+      import org.springframework.stereotype.Controller;
+      import org.springframework.web.bind.annotation.*;
+      
+      import java.util.HashMap;
+      import java.util.Map;
+      
+      @RestController
+      @RequestMapping("/api")
+      public class Hello {
+      
+          @GetMapping("/book/{id}")//@PathVariable若有指定名稱那變數就不一定要用與{}內一樣的
+          public Map one(@PathVariable("id") long bid) {//或不指定名稱public Map one(@PathVariable long id){
+              System.out.println("-------------id:" + bid);
+              Map<String, Object> bookmap = new HashMap<>();
+              bookmap.put("name", "我是一本書");
+              bookmap.put("number", "123156465451321");
+              bookmap.put("a", "321");
+              return bookmap;
+          }
+      }
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "Hello.java"
+    mode: "Java"
+    content: '''
+      //傳送多個參數(http://127.0.0.1:8080/api/book/9/aaa)
+      package com.ahua.springdemo.web;
+      
+      import org.springframework.stereotype.Controller;
+      import org.springframework.web.bind.annotation.*;
+      
+      import java.util.HashMap;
+      import java.util.Map;
+      
+      @RestController
+      @RequestMapping("/api")
+      public class Hello {
+      
+          @GetMapping("/book/{id}/{text}")
+          public Map one(@PathVariable("id") long id,@PathVariable("text") String text) {//或不指定名稱public Map one(@PathVariable long id,@PathVariable String text){
+              System.out.println("-------------id:" + id);
+              Map<String, Object> bookmap = new HashMap<>();
+              bookmap.put("name", "我是一本書");
+              bookmap.put("number", "123156465451321");
+              bookmap.put("a", "321");
+              bookmap.put("a", text);
+              return bookmap;
+          }
+        /*另外如果把參數提到字串網址以前，依然可行(http://127.0.0.1:8080/api/9/book/aaa)
+        @GetMapping("/{id}/book/{text}")
+          public Map one(@PathVariable("id") long id,@PathVariable("text") String text) {//或不指定名稱public Map one(@PathVariable long id,@PathVariable String text){
+              System.out.println("-------------id:" + id);
+              Map<String, Object> bookmap = new HashMap<>();
+              bookmap.put("name", "我是一本書");
+              bookmap.put("number", "123156465451321");
+              bookmap.put("a", "321");
+              bookmap.put("a", text);
+              return bookmap;
+          }  
+        */
+      }
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "Hello.java"
+    mode: "Java"
+    content: '''
+      //指定正則表達式，若不符合規則，則返回無效的請求，寫法: {參數名:正則表達式}
+      package com.ahua.springdemo.web;
+      
+      import org.springframework.stereotype.Controller;
+      import org.springframework.web.bind.annotation.*;
+      
+      import java.util.HashMap;
+      import java.util.Map;
+      
+      @RestController
+      @RequestMapping("/api")
+      public class Hello {
+      
+          @GetMapping("/book/{id}/{text:[a-z_]+}")//此表達式為只能輸入小寫字母
+          public Map one(@PathVariable("id") long id,@PathVariable("text") String text) {//或不指定名稱public Map one(@PathVariable long id,@PathVariable String text){
+              System.out.println("-------------id:" + id);
+              Map<String, Object> bookmap = new HashMap<>();
+              bookmap.put("name", "我是一本書");
+              bookmap.put("number", "123156465451321");
+              bookmap.put("a", "321");
+              bookmap.put("a", text);
+              return bookmap;
+          }
+      
+      }
+      
+    '''
+  }
+]
+isStarred: false
+isTrashed: false

@@ -1,0 +1,38 @@
+createdAt: "2019-04-05T18:57:11.173Z"
+updatedAt: "2019-04-16T17:30:37.662Z"
+type: "SNIPPET_NOTE"
+folder: "36ef10a205c49c0cdc86"
+title: "@RestController標註方法"
+tags: []
+description: "@RestController標註方法"
+snippets: [
+  {
+    linesHighlighted: []
+    name: "Hello.java"
+    mode: "Java"
+    content: '''
+      package com.ahua.springdemo.web;
+      
+      import org.springframework.stereotype.Controller;
+      import org.springframework.web.bind.annotation.*;
+      
+      import java.util.HashMap;
+      import java.util.Map;
+      
+      
+      @RestController
+      @RequestMapping("/api")//使用@RequestMapping表示接受任何請求方法，可用Postman獲得證明
+      public class Hello {
+          //以下方法等同寫法
+          //@RequestMapping(value = "/say", method = RequestMethod.GET)   //亦可搭配其他種Request
+          @GetMapping("/say")
+          public String hello() {
+              return "helloworld idea";
+          }
+      }
+      
+    '''
+  }
+]
+isStarred: false
+isTrashed: false

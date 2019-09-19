@@ -1,0 +1,58 @@
+createdAt: "2019-05-04T07:18:33.799Z"
+updatedAt: "2019-05-04T07:19:53.475Z"
+type: "SNIPPET_NOTE"
+folder: "888163b6bb8ae21eaf80"
+title: "2.3 方法5 code"
+tags: []
+description: "2.3 方法5 code "
+snippets: [
+  {
+    linesHighlighted: []
+    name: "contest.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.web;
+      
+      import com.example.boottest.domin.Book;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.stereotype.Controller;
+      import org.springframework.ui.Model;
+      import org.springframework.web.bind.annotation.*;
+      
+      @Controller
+      public class contest {
+      
+        @PostMapping("/s/{id}")
+        @ResponseBody
+        public String one(@RequestParam int id) {
+      
+          return String.valueOf(id);
+        }
+      }
+      
+      /////////////////////////////////////////以下補充以不同的參數名字做傳值
+      
+      package com.example.boottest.web;
+      
+      import com.example.boottest.domin.Book;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.stereotype.Controller;
+      import org.springframework.ui.Model;
+      import org.springframework.web.bind.annotation.*;
+      
+      @Controller
+      public class contest {
+      
+        @PostMapping("/s/{iid}")
+        @ResponseBody
+        public String one(@RequestParam("iid") int id) {       ///Post訪問提交參數名為iid
+      
+          return String.valueOf(id);
+        }
+      }
+      
+    '''
+  }
+]
+isStarred: false
+isTrashed: false

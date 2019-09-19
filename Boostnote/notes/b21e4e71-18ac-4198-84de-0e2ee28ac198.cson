@@ -1,0 +1,177 @@
+createdAt: "2019-05-04T17:24:17.882Z"
+updatedAt: "2019-05-04T17:32:16.906Z"
+type: "SNIPPET_NOTE"
+folder: "888163b6bb8ae21eaf80"
+title: "3.1 方法2 code"
+tags: []
+description: "3.1 方法2 code "
+snippets: [
+  {
+    linesHighlighted: []
+    name: "contest.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.web;
+      
+      import com.example.boottest.domin.Book;
+      import com.example.boottest.service.Bookservice;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.stereotype.Controller;
+      import org.springframework.ui.Model;
+      import org.springframework.web.bind.annotation.*;
+      
+      @Controller
+      public class contest {
+        // Web層
+        @Autowired private Bookservice bookservice;
+      
+        @PostMapping("/update")
+        public String s(
+            @RequestParam Long id,            ///////指定id必輸 
+            @RequestParam String name,
+            @RequestParam String at,
+            @RequestParam String sex,
+            Model model) {
+          Book c = new Book();
+          c.setId(id);
+          c.setAt(at);
+          c.setName(name);
+          c.setSex(sex);
+          bookservice.addone(c);
+          model.addAttribute("b", c);
+          return "hi";
+        }
+      }
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "Bookservice.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.service;
+      
+      import com.example.boottest.domin.Book;
+      import com.example.boottest.domin.BookRepository;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.stereotype.Service;
+      
+      @Service
+      public class Bookservice {
+        // Service層
+        @Autowired private BookRepository bookRepository;
+      
+        public Book addone(Book b) {
+      
+          return bookRepository.save(b);
+        }
+      }
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "BookRepository.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.domin;
+      
+      import org.springframework.data.jpa.repository.JpaRepository;
+      import org.springframework.stereotype.Repository;
+      
+      public interface BookRepository extends JpaRepository<Book, Long> {
+        // interface(接口)層
+      }
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "Book.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.domin;
+      
+      import org.springframework.boot.context.properties.ConfigurationProperties;
+      import org.springframework.stereotype.Component;
+      
+      import javax.persistence.Entity;
+      import javax.persistence.GeneratedValue;
+      import javax.persistence.GenerationType;
+      import javax.persistence.Id;
+      
+      @Entity
+      public class Book {
+        // 實體類
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        private Long id;
+      
+        String name;
+        String at;
+        String sex;
+      
+        public Book() {}
+      
+        public String getName() {
+          return name;
+        }
+      
+        public void setName(String name) {
+          this.name = name;
+        }
+      
+        public String getAt() {
+          return at;
+        }
+      
+        public void setAt(String at) {
+          this.at = at;
+        }
+      
+        public Long getId() {
+          return id;
+        }
+      
+        public void setId(Long id) {
+          this.id = id;
+        }
+      
+        public String getSex() {
+          return sex;
+        }
+      
+        public void setSex(String sex) {
+          this.sex = sex;
+        }
+      }
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "hi.html"
+    mode: "HTML"
+    content: '''
+      <!DOCTYPE html>
+      <html lang="en"
+            xmlns:th="http://www.w3.org/1999/xhtml">
+      <head>
+          <meta charset="UTF-8">
+          <title>Title</title>
+      </head>
+      <body>
+      test success<br>
+      <div th:text="${b.at}"></div>
+      <div th:text="${b.name}"></div>
+      <div th:text="${b.sex}"></div>
+      <div th:text="${b.id}"></div>
+      </body>
+      </html>
+      
+    '''
+  }
+]
+isStarred: false
+isTrashed: false

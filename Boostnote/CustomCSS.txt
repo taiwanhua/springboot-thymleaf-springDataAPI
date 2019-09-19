@@ -1,0 +1,11 @@
+red{color: red;}
+blue{color: blue;}
+orange{color: orange;}
+dredbg {
+  border-left: 10px solid #FF0000;
+  border-right: 10px solid #FF0000;
+  background-color:	#FF0000 ;
+  border-radius: 5px;
+  color:white
+}
+fontw{color: white;}

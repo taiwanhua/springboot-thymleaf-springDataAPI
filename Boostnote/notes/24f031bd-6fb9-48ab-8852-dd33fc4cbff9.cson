@@ -1,0 +1,37 @@
+createdAt: "2019-05-04T04:20:07.806Z"
+updatedAt: "2019-05-04T04:34:12.017Z"
+type: "SNIPPET_NOTE"
+folder: "888163b6bb8ae21eaf80"
+title: "2.1 方法1 code"
+tags: []
+description: "2.1 方法1 code"
+snippets: [
+  {
+    linesHighlighted: []
+    name: "contest.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.web;
+      
+      import com.example.boottest.domin.Book;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.stereotype.Controller;
+      import org.springframework.web.bind.annotation.*;
+      
+      @Controller
+      public class contest {
+      
+        @GetMapping("/s")
+        @ResponseBody           //添加此標註讓此方法效果同@RestController標註，直接打印java內容
+                                //若無此標註，則需要對應到模板hi.html，否則報錯
+        public String one() {
+      
+          return "hi";
+        }
+      }
+      
+    '''
+  }
+]
+isStarred: false
+isTrashed: false

@@ -1,0 +1,76 @@
+createdAt: "2019-05-04T07:23:38.679Z"
+updatedAt: "2019-05-04T07:27:34.612Z"
+type: "SNIPPET_NOTE"
+folder: "888163b6bb8ae21eaf80"
+title: "2.3 方法4 code"
+tags: []
+description: "2.3 方法4 code "
+snippets: [
+  {
+    linesHighlighted: []
+    name: "contest.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.web;
+      
+      import com.example.boottest.domin.Book;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.stereotype.Controller;
+      import org.springframework.ui.Model;
+      import org.springframework.web.bind.annotation.*;
+      
+      @Controller
+      public class contest {
+      
+        @PostMapping("/s/{id}")
+        public String one(@RequestParam int id, Model model) {//因為@Controller會對應到一個模板去，值得傳遞會牽涉到thmeleaf Model，所以在hi.html也要做接收設置
+          model.addAttribute("i", String.valueOf(id));
+          return "hi";
+        }
+      }
+      
+      
+      /////////////////////////////////////////以下補充以不同的參數名字做傳值
+      
+      package com.example.boottest.web;
+      
+      import com.example.boottest.domin.Book;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.stereotype.Controller;
+      import org.springframework.ui.Model;
+      import org.springframework.web.bind.annotation.*;
+      
+      @Controller
+      public class contest {
+      
+        @PostMapping("/s/{iid}")
+        public String one(@RequestParam("iid") int id, Model model) {       ///Post訪問提交參數名為iid
+          model.addAttribute("i", String.valueOf(id));
+          return "hi";
+        }
+      }
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "hi.html"
+    mode: "HTML"
+    content: '''
+      <!DOCTYPE html>
+      <html lang="en"
+            xmlns:th="http://www.w3.org/1999/xhtml">
+      <head>
+          <meta charset="UTF-8">
+          <title>Title</title>
+      </head>
+      <body>
+      test success<br>
+      <div th:text="${i}"></div>
+      </body>
+      </html>
+      
+    '''
+  }
+]
+isStarred: false
+isTrashed: false

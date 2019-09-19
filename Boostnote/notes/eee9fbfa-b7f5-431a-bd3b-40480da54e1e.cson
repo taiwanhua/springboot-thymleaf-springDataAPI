@@ -1,0 +1,491 @@
+createdAt: "2019-05-02T14:36:08.439Z"
+updatedAt: "2019-05-25T17:06:05.028Z"
+type: "MARKDOWN_NOTE"
+folder: "888163b6bb8ae21eaf80"
+title: "目錄"
+tags: []
+content: '''
+  ![00025.jpg](C:/Boostnoteimg/00025.jpg)
+  # 目錄
+  ###### <fontw>TOP </fontw>
+  >## 1. 環境配置
+  >>#### [1.1. IDEA安裝](#IDEA)
+  >>#### [1.2. IDEA編輯器基本設置](#IDEA1_2)
+  >>#### [1.3. 引入google-java-format插件自動排版](#IDEA1_3)
+  >>#### [1.4. IDEA以Spring-boot搭建開發環境](#IDEA1_4)
+  >>#### [1.5. 以Maven引入Thymeleaf配置](#IDEA1_5)
+  >>#### [1.6. 以Maven引入Spring data JPA配置搭載MariaDB](#IDEA1_6)
+  >>#### [1.7. 配置application.properties](#IDEA1_7)
+  >>#### [1.8. 使用application.properties配置參數](#IDEA1_8)
+  >>#### [1.9. 使用application.yml配置參數](#IDEA1_9)
+  >>#### [1.10. 多環境配置](#IDEA1_10)
+  >>#### [1.11. jar檔多環境切換](#IDEA1_11)
+  >>#### [1.12. 引入靜態資源](#IDEA1_12)
+  >>
+  >## 2. Request基本說明
+  >>#### [2.1. @Controller](#IDEA2_1)
+  >>#### [2.2. @RestController](#IDEA2_2)
+  >>#### [2.3. Request參數傳遞](#IDEA2_3)
+  >>
+  >## 3. Spring data JPA
+  >>#### [3.1. 使用JPA內建方法訪問](#IDEA3_1)
+  >>#### [3.2. 使用JPQL訪問](#IDEA3_2)
+  >>#### [3.3. 使用SQL Query訪問](#IDEA3_3)
+  >>#### [3.4. 自訂義查詢](#IDEA3_4)
+  >>#### [3.5. JPA事務](#IDEA3_5)
+  >>#### [3.6. 分頁查詢](#IDEA3_6)
+  >>
+  >## 4. Thymeleaf
+  >>#### [4.1. thymeleaf標籤搭配@Controller](#IDEA4_1)
+  >>>##### [4.1.1. 引入標籤](#IDEA4_1_1)
+  >>>##### [4.1.2. 傳值.object、迭代each、文字text、屬性class](#IDEA4_1_2)
+  >>>##### [4.1.3. 開關switch,case](#IDEA4_1_3)
+  >>>##### [4.1.4. if、unless、OR、AND](#IDEA4_1_4)
+  >>>##### [4.1.5. 連結href、引入src](#IDEA4_1_5)
+  >>>##### [4.1.6. form表單action、值value、Request重定向、html的\\<select>標籤](#IDEA4_1_6)
+  >>>##### [4.1.7. field、selected](#IDEA4_1_7)
+  >>>##### [4.1.8. 使用addFlashAttribute實現跨Request傳值](#IDEA4_1_8)
+  >>>##### 4.1.9. 
+  >>>##### 4.1.10. 
+  >>>##### 4.1.11. 
+  >>>##### 4.1.12. 
+  >>>##### 4.1.13. 
+  >>>##### 4.1.14. 
+  >>>
+  >## 5. 組合應用
+  >>#### [5.1. 表單處理](#IDEA5_1)
+  >>>##### [5.1.1. 表單數據傳輸](#IDEA5_1_1)
+  >>>##### [5.1.2. 後端數據驗證](#IDEA5_1_2)
+  >>>##### [5.1.3. 渲染錯誤訊息至模板](#IDEA5_1_3)
+  >>#### [5.2. 頁面異常處理](#IDEA5_2)
+  >>>##### [5.2.1. 自訂義錯誤頁面](#IDEA5_2_1)
+  >>>##### [5.2.2. 以HttpStatus重導向錯誤頁面](#IDEA5_2_2)
+  >>>##### [5.2.3. 單一外部控制器錯誤處理](#IDEA5_2_3)
+  >>>
+  ---  
+  >## 1. 環境配置
+  >###### <fontw>IDEA </fontw>
+  >>#### 1.1. IDEA安裝 
+  >>Step1:
+  >>連結[IDEA官方網址](https://www.jetbrains.com/idea/download/#section=windows)選擇Ultimate版下載，
+  >>![00026.jpg](C:/Boostnoteimg/00026.jpg)
+  >>Step2:
+  >>下載完後一直下一步到底完成安裝並開啟IDEA。
+  >>Step3:
+  >>下載並安裝java11
+  >>[返回目錄:arrow_up_small:](#TOP)
+  >###### <fontw>IDEA1_2 </fontw>
+  >>#### 1.2. IDEA編輯器基本設置
+  >>[返回目錄:arrow_up_small:](#TOP)
+  >###### <fontw>IDEA1_3 </fontw>
+  >>#### 1.3. 引入google-java-format插件自動排版
+  >>Step1:
+  >>選擇左上方File->Settings->導覽列內選擇Plugins->搜尋google-java-format並安裝插件
+  >>![00027.jpg](C:/Boostnoteimg/00027.jpg)
+  >>Step2:
+  >>安裝好後選擇google-java-format Settings並勾選Enable google-java-format，完成設置後使用Ctrl+alt+l自動排版
+  >>![00028.jpg](C:/Boostnoteimg/00028.jpg)
+  >>[返回目錄:arrow_up_small:](#TOP)
+  >###### <fontw>IDEA1_4 </fontw>
+  >>#### 1.4. IDEA以Spring-boot搭建開發環境
+  >>Step1:
+  >>選擇左上方File->New->project...
+  >>![00029.jpg](C:/Boostnoteimg/00029.jpg)
+  >>Step2:
+  >>選擇Spring initalizr自動搭建、選擇java版本11，選擇Next下一步
+  >>![00030.jpg](C:/Boostnoteimg/00030.jpg)
+  >>Step3:
+  >>調整java版本為11，並且可以隨需要更改包名，選擇Next下一步
+  >>![00031.jpg](C:/Boostnoteimg/00031.jpg)
+  >>Step4:
+  >>選擇Web組件，也可以選擇SQL載入JPA，選擇Next下一步
+  >>![00031.jpg](C:/Boostnoteimg/00032.jpg)
+  >>Step5:
+  >>選擇Finish後IDEA將會自動搭建專案
+  >>![00031.jpg](C:/Boostnoteimg/00033.jpg)
+  >>[返回目錄:arrow_up_small:](#TOP)
+  >###### <fontw>IDEA1_5 </fontw>
+  >>#### 1.5. 以Maven引入Thymeleaf配置
+  >>Step1:
+  >>在pom.xml檔裡的\\<dependencies>\\</dependencies>標籤內加入Thymeleaf，若我們不指定Thymeleaf版本號，則會依據\\<parent>\\</paren>標籤內org.springframework.boot的版本號抓取對應的Thymeleaf版本號，但也可以透過指定的方式獲取指定的版本
+  >><orange>配置程式碼:
+  >>\\<dependency>\\
+  >>\\<groupId>org.springframework.boot\\</groupId>
+  >>\\<artifactId>spring-boot-starter-thymeleaf\\</artifactId>
+  >>\\</dependency></orange>
+  >>![00031.jpg](C:/Boostnoteimg/00034.jpg)
+  >>
+  >>![00031.jpg](C:/Boostnoteimg/00035.jpg)
+  >>!!!  note [程式碼 (1.5 code)](:note:87beae5b-4510-405a-bc2f-f493ffdf0a29)
+  >>!!!
+  >>[返回目錄:arrow_up_small:](#TOP)
+  >###### <fontw>IDEA1_6 </fontw>
+  >>#### 1.6. 以Maven引入Spring data JPA配置搭載MariaDB
+  >>Step1:
+  >>在pom.xml檔裡的\\<dependencies>\\</dependencies>標籤內加入Hibrenate JPA與MariaDB jdbc，另外同引入thymeleaf因為有\\<parent>\\</paren>標籤自動抓取所以不須指定版本號
+  >><orange>配置程式碼:
+  >>\\<dependency>
+  >>\\<groupId>org.mariadb.jdbc\\</groupId>
+  >>\\<artifactId>mariadb-java-client\\</artifactId>
+  >>\\</dependency>
+  >>\\<dependency>
+  >>\\<groupId>org.springframework.boot\\</groupId>
+  >>\\<artifactId>spring-boot-starter-data-jpa\\</artifactId>
+  >>\\</dependency></orange>
+  >>![00031.jpg](C:/Boostnoteimg/00036.jpg)
+  >>Step2:
+  >>我們還需要在application.properties內設置spring.datasource項下幾個設定，driver-class(驅動名稱)、url(連線資料庫位址)、username、password
+  >><orange>配置程式碼:
+  >>spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+  >>spring.datasource.url= jdbc:mariadb://127.0.0.1:3306/book?useUnicode=true&characterEncoding=utf-8
+  >>spring.datasource.username= fansofcheer
+  >>spring.datasource.password= cheerstyle
+  >>spring.jpa.hibernate.ddl-auto: update
+  >>spring.jpa.show-sql: true</orange>
+  >>這裡特別說明jpa.hibernate.ddl-auto:參數，如下表:
+  >>表中這幾個參數設置了是對所有資料表都起作用
+  >>| 參數        | 效果           
+  >>| ------------- |:-------------:|
+  >>| create      | 會刪除上一次的生成的表，然後根據指定新來生成新表。 |
+  >>| create-drop      | 每次加載休眠時根據模型類生成表，但是SessionFactory的一關閉，表就自動刪除。      |
+  >>| update | 當沒有表就建一個，有就直接使用表      |
+  >>| validate     | 加載時，驗證創建數據庫表結構 |
+  >>!!!  note [程式碼(1.6 code)](:note:7e966ce1-f5c3-4af1-84e0-51de802e1a39)
+  >>!!!
+  >>Step3:
+  >>因為JPA溝通的資料庫是MariaDB所以我們需要配置MariaDB，那我們透過Xampp整合套件來配置，先連上Xampp官網網址[網址](https://www.apachefriends.org/zh_tw/index.html)，下載後安裝並打開Xampp的控制器按下Start開啟資料庫，配置完成
+  >>![00031.jpg](C:/Boostnoteimg/00037.jpg)
+  >>
+  >>
+  >>[返回目錄:arrow_up_small:](#TOP)
+  >###### <fontw>IDEA1_7 </fontw>
+  >>#### 1.7. 配置application.properties
+  >>application.properties檔案能夠在專案Templates/路徑下找到(如下[圖1](#pic1))，基本的配置如下[表1](#table1)，範例如下方程式碼，在下面幾節會提到yml配置、多環境配置、預設參數傳遞等應用。
+  >>###### <fontw>pic1</fontw>
+  >>###### <blue>圖1:</blue>![00031.jpg](C:/Boostnoteimg/00001.jpg)
+  >>
+  >>###### <fontw>table1</fontw>
+  >>###### <blue>表1:</blue>
+  >>|語法           |作用          |範例      |
+  >>|:------------- |:-------------|:-----------|
+  >>|server.port    | 自訂port號碼| server.port=8082|
+  >>|server.servlet.context-path| 添加路徑(全域)      |server.servlet.context-path=/path|
+  >>|logging.level|設定指定目錄之log級別|logging.level.root=WARN<br>logging.level.com.ahua.springdemo=Debug<br>![00010.jpg](C:/Boostnoteimg/00010.jpg)|
+  >>|logging.file|指定log檔案存放位置|logging.file=log/mylog|
+  >>|logging.pattern.file|自訂義log輸出格式|見程式碼連結|
+  >>|spring.http.encoding.charset<br>server.tomcat.uri-encoding|解決中文亂碼|spring.http.encoding.charset=UTF-8<br>server.tomcat.uri-encoding=UTF-8|
+  >>
+  >>!!!  note [程式碼(1.7 code)](:note:501fcb29-ade8-4808-ab7a-66116d6b80c9)
+  >>!!!
+  >>[返回目錄:arrow_up_small:](#TOP)
+  >###### <fontw>IDEA1_8 </fontw>
+  >>#### 1.8. 使用application.properties配置參數
+  >>>第一種方式:
+  >>>在properties檔內定義參數，java class內用@Value接收
+  >>>Step1:
+  >>>先在properties寫入參數如book.name=測試傳遞參數
+  >>>Step2:
+  >>>在java class內添加@Value標籤調用參數 
+  >>>!!!  note [程式碼(1.8方法1 code)](:note:a641a8ee-6491-4993-ad5c-cb92e91dbe9a)
+  >>>!!!
+  >>
+  >>>第二種方式:
+  >>>在properties檔內定義參數，以實體對象做接收
+  >>>Step1:
+  >>>先在properties寫入參數
+  >>>Step2:
+  >>>創建實體類別，對應properties寫入的參數並配置@Component、@ConfigurationProperties標註
+  >>>Step3:
+  >>>在java class內添加@Autowired標註注入實體，再供調用
+  >>>!!!  note [程式碼(1.8方法2 code)](:note:c2c053e3-5075-4c04-9bbf-67703b2dafda)
+  >>>!!!
+  >>
+  >>[返回目錄:arrow_up_small:](#TOP)
+  >>
+  >###### <fontw>IDEA1_9 </fontw>
+  >>#### 1.9. 使用application.yml配置參數
+  >>yml配置檔算是application.properties檔案的另一種相同功能的配置檔，properties檔是條列式；yml是階層式並且因為是以UTF-8寫成所以避免掉中文亂碼問題，而yml配置時原始的application.properties檔案也要存在，並且配置於resources/config目錄下
+  >>![00039.jpg](C:/Boostnoteimg/00039.jpg)
+  >>!!!  note [程式碼(1.9 code)](:note:3fb44576-2d19-4114-8382-08a35f68e202)
+  >>!!!
+  >>[返回目錄:arrow_up_small:](#TOP)
+  >>
+  >###### <fontw>IDEA1_10 </fontw>
+  >>#### 1.10. 多環境配置
+  >>免不了在開發中會遇到將環境分成測式環境、開發環境等等狀況，本節就是要解釋如何透過yml配置多環境
+  >>Step1:
+  >>透過spring.profiles.active=XXX指定環境，而所謂環境亦是另一份yml配置檔，另外spring.profiles.active可以指定多個值可以用在例如遭料庫也要分開指定的情況
+  >><orange>配置程式碼:
+  >>spring:
+  >>&emsp;profiles:
+  >>&emsp;&emsp;active: uat</orange>
+  >>Step1:
+  >>先配置如下圖config目錄下三個yml檔，application.yml是首個被讀取的檔案，在其中加入spring.profiles.active指定啟用的配置檔
+  >>![00039.jpg](C:/Boostnoteimg/00039.jpg)
+  >>!!!  note [程式碼(1.10 code)](:note:844f3b7e-a1cc-4814-ba5f-5c1c9744a790)
+  >>!!!
+  >>[返回目錄:arrow_up_small:](#TOP)
+  >>
+  >###### <fontw>IDEA1_11 </fontw>
+  >>#### 1.11. jar檔多環境切換
+  >>Step1:
+  >>將專案用Maven打包，在CMD或終端機輸入指令打包jar(mvn package)，或直接用IDEA的Maven工具打包
+  >>![00017.jpg](C:/Boostnoteimg/00017.jpg)
+  >>Step2:
+  >>運行jar包，並透過指令針對spring.profiles.active做修改
+  >><orange>//切換至專案路徑下target</orange>
+  >><orange>cd target
+  >><orange>//列出目錄下所有檔案</orange>
+  >><orange>dir</orange>
+  >><orange>//切到DEV環境</orange>
+  >><orange>java -jar springdemo-0.0.1-SNAPSHOT.jar --spring.profiles.active=dev </orange>
+  >>
+  >>[返回目錄:arrow_up_small:](#TOP)
+  >>
+  >###### <fontw>IDEA1_12 </fontw>
+  >>#### 1.12. 引入靜態資源
+  >>Step1:
+  >>將資源放入resources/static目錄下，如圖
+  >>![00017.jpg](C:/Boostnoteimg/00040.jpg)
+  >>Step2:
+  >>打開要引入配置的html檔案，加入配置文件檔路徑，如以下程式碼
+  >>!!! note [程式碼(1.12 code)](:note:2f46e141-9dba-435f-9254-c1af3fbc3797)
+  >>!!!
+  >>[返回目錄:arrow_up_small:](#TOP)
+  ---  
+  >## 2. Request基本說明
+  >@Controller或@RestController標記都是一種讓java類別成為外部控制器的註釋，若沒了這個標記，那java類就是java類而已
+  >###### <fontw>IDEA2_1 </fontw>
+  >>#### 2.1. @Controller
+  >>使用@Controller相較@RestController靈活許多，因@Controller能夠搭配Thymeleaf模板使用，亦能夠使用@ResponseBody標註使標註的方法能夠如@RestController般直接打印java內容，而指定http請求方法與@RestController相同
+  >>>偶而在使用@Controller時會有需要它只打印java內容則可以添加@ResponseBody標註，如下方程式碼(2.1 方法1 code)
+  >>>!!! note [程式碼(2.1 方法1 code)](:note:24f031bd-6fb9-48ab-8852-dd33fc4cbff9)
+  >>>!!!
+  >>
+  >>>若想以@Controller搭配模板使用，則須讓java內方法返回的字串對應到一個相同名稱的html檔案，如下方程式碼(2.1 方法2 code)
+  >>>!!! note [程式碼(2.1 方法2 code)](:note:075569e0-0ad0-455f-8233-a56e6e01c99a)
+  >>
+  >>[返回目錄:arrow_up_small:](#TOP)
+  >>
+  >###### <fontw>IDEA2_2 </fontw>
+  >>#### 2.2. @RestController
+  >>相較於@Controller標註無彈性的@RestController標註，能夠適用在只打印java內容的時機上
+  >>>使用@RestController寫一個Rest風格的Api(直接打印java內容，不套用模板)時一定要標註@RequestMapping在類別下的方法上指定路由，否則將會返回404 not found錯誤，如下方程式碼(2.2 方法1 code)
+  >>>!!!  note [程式碼(2.2 方法1 code)](:note:dded005b-0d75-45d0-9934-3ef17101e1a4)
+  >>>!!!
+  >>
+  >>>而http Request有多種請求方法，我們也能夠指定請求方法，如下方程式碼(2.2 方法2 code)
+  >>>!!!  note [程式碼(2.2 方法2 code)](:note:b28fc6ea-c723-49bc-99ea-c7203d98ca2a)
+  >>>!!!
+  >>
+  >>>指定請求的方法Spring MVC有提供簡寫如@GetMapping、@PostMapping等，如下方程式碼(2.2 方法3 code)
+  >>>!!!  note [程式碼(2.2 方法3 code)](:note:827ca59d-70a0-4508-95b4-6298fde12c3f)
+  >>>!!!
+  >>>
+  >>[返回目錄:arrow_up_small:](#TOP)
+  >>
+  >###### <fontw>IDEA2_3 </fontw>
+  >>#### 2.3. Request參數傳遞
+  >>Request參數傳遞主要分成兩類，一種是直接url改變就能傳遞如GET，另一種是透過提交如POST，下面將描述兩種不同的傳遞方式
+  >>>使用@PathVariable透過url傳遞
+  >>>@Controller+thymeleaf:
+  >>>!!! note [程式碼(2.3 方法1 code)](:note:ba1b4fb2-cb02-4228-9c8c-cb09c56e4c95)
+  >>>!!!
+  >>>@Controller+@ResponseBody:
+  >>>!!! note [程式碼(2.3 方法2 code)](:note:21418d4f-446f-4456-b0ee-c9119b40148a)
+  >>>!!!
+  >>>@RestController:
+  >>>!!! note [程式碼(2.3 方法3 code)](:note:b80ad13d-39cb-4393-845e-453ec672db43)
+  >>>!!!!
+  >>
+  >>>使用@RequestParam透過提交傳遞
+  >>>@Controller+thymeleaf:
+  >>>!!! note [程式碼(2.3 方法4 code)](:note:d6fcdca8-6805-42d6-accd-782c4b397c38)
+  >>>!!!
+  >>>@Controller+@ResponseBody:
+  >>>!!! note [程式碼(2.3 方法5 code)](:note:bb1ae203-b00b-4ea8-89f1-23dea1525864)
+  >>>!!!
+  >>>@RestController:
+  >>>!!! note [程式碼(2.3 方法6 code)](:note:f5437d0b-0b86-46e9-bed4-6920213125e5)
+  >>>!!!
+  >>
+  >>[返回目錄:arrow_up_small:](#TOP)
+  >>
+  ---  
+  >## 3. Spring data JPA
+  >接下來會說明Spring data JPA的基本使用方法，而是如何達到架構持久化接口，可以先看下圖
+  >![00017.jpg](C:/Boostnoteimg/00041.jpg)使用Spring data JPA一定要有Web層呈現結果給使用者、Service層組合調用Repository層方法、Repository層溝通資料庫、實體類對應資料表，所以一定要先配置好這些
+  >![00017.jpg](C:/Boostnoteimg/00042.jpg)
+  >!!! note [程式碼(3 code)](:note:14faafee-8853-4852-aa27-46e82e1662bb)
+  >!!!
+  >###### <fontw>IDEA3_1 </fontw>
+  >>#### 3.1. 使用JPA內建方法訪問
+  >>>新增一筆數據在table最尾端:
+  >>>!!! note  [程式碼(3.1 方法1 code)](:note:e15fd20a-4810-479f-a19a-e97f8c1bc3d1)
+  >>>!!!
+  >>
+  >>>修改一筆數據在指定列:
+  >>>!!! note [程式碼(3.1 方法2 code)](:note:b21e4e71-18ac-4198-84de-0e2ee28ac198)
+  >>>!!!
+  >>
+  >>>查詢一筆數據在指定列:
+  >>>!!! note [程式碼(3.1 方法3 code)](:note:4168f5f8-c53f-4cdd-88e2-181bc59d4ccb)
+  >>>!!!
+  >>
+  >>>查詢全部數據:
+  >>>!!! note [程式碼(3.1 方法4 code)](:note:31334973-f632-4a81-9484-17f989fc99ed)
+  >>>!!!
+  >>
+  >>>刪除一筆數據在指定列:
+  >>>!!! note [程式碼(3.1 方法5 code)](:note:d0721a43-f4be-4156-8372-5087752b5b2d)
+  >>>!!!
+  >>
+  >>>刪除全部數據:
+  >>>!!! note [程式碼(3.1 方法6 code)](:note:28d2bc27-0a9d-407a-a856-f79cd434b68c)
+  >>>!!!
+  >>
+  >>[返回目錄:arrow_up_small:](#TOP)
+  >###### <fontw>IDEA3_2 </fontw>
+  >>#### 3.2. 使用JPQL訪問
+  >>使用JPQL語句試例:
+  >>!!! note [程式碼(3.2  code)](:note:fd717cde-db4f-439d-b736-a3833a00855a)
+  >>!!!
+  >>[返回目錄:arrow_up_small:](#TOP)
+  >###### <fontw>IDEA3_3 </fontw>
+  >>#### 3.3. 使用SQL Query訪問
+  >>使用SQL Query語句試例:
+  >>!!! note [程式碼(3.3 code)](:note:dcaf48a2-12b9-4cd1-9f81-dd40d35289aa)
+  >>!!!
+  >>[返回目錄:arrow_up_small:](#TOP)
+  >###### <fontw>IDEA3_4 </fontw>
+  >>#### 3.4. 自訂義查詢
+  >>自訂義查詢試例:
+  >>!!! note [程式碼(3.4 code)](:note:cc2ca69d-1e82-48b5-9a4a-fe521ec0d380)
+  >>!!!
+  >>[返回目錄:arrow_up_small:](#TOP)
+  >###### <fontw>IDEA3_5 </fontw>
+  >>#### 3.5. JPA事務
+  >>如果有需求是要一次連續對資料庫有多個操作，例如一口氣先査再刪再新增之類的，就要在Service層將多個接口層方法包進一個方法裡，而這牽涉到報錯要不要回滾的問題，若要回滾要加上@Transactional標註，若不回滾則不需要加，試例如下:
+  >>!!! note [程式碼(3.5 code)](:note:22c263a7-0f68-499a-ba76-0e1a94160f03)
+  >>!!!
+  >>[返回目錄:arrow_up_small:](#TOP)
+  >>
+  >###### <fontw>IDEA3_6 </fontw>
+  >>#### 3.6. 分頁查詢
+  >>JPA對於分頁查詢有良好支持，能夠在不寫SQL語句下完成，並且可以與其他JPA方法混用，另外Page\\<Book>返回的json如圖，所以取值時需要是對應json取，如th:each="f,iter:${g.content}" 
+  >>![00017.jpg](C:/Boostnoteimg/00043.jpg)
+  >>!!! note [程式碼(3.6 code)](:note:2b4ba10b-4d39-449d-8485-ef1a2b9baf65)
+  >>!!!
+  >>
+  >>[返回目錄:arrow_up_small:](#TOP)
+  >>
+  >>
+  ---  
+  >## 4. Thymeleaf
+  >###### <fontw>IDEA4_1 </fontw>
+  >>#### 4.1. thymeleaf標籤搭配@Controller
+  >>以下顯示最簡單的引入BootStrap、JQuery、thymeleaf的html檔
+  >>!!! note [程式碼(4.1 code)](:note:5b03901b-96a4-47f4-8f92-ac75cb0e1cdf)
+  >>!!!
+  >>###### <fontw>IDEA4_1_1 </fontw>
+  >>>##### 4.1.1. 引入標籤
+  >>>當做完4.1步驟的時候，已經搭建起環境，只要打上th:就會自動引入資源xmlns:th="http://www.w3.org/1999/xhtml"
+  >>###### <fontw>IDEA4_1_2 </fontw>
+  >>>##### 4.1.2. 傳值.object、迭代each、文字text、屬性class
+  >>>以下程式碼示範一個組合應用:
+  >>>!!! note [程式碼(4.1.2 code)](:note:0291a1a6-6b40-47b2-a278-cd9471ccd458)
+  >>>!!!
+  >>###### <fontw>IDEA4_1_3 </fontw>
+  >>>##### 4.1.3. 開關switch,case
+  >>>使用switch標籤時會對應case狀況做處理，若超出case範圍則返回空值(不處理狀況)
+  >>>!!! note [程式碼(4.1.3 code)](:note:7750c8fa-7593-48ee-b906-c52329289463)
+  >>>!!!
+  >>
+  >>###### <fontw>IDEA4_1_4 </fontw>
+  >>>##### 4.1.4. if、unless、OR、AND
+  >>>if指定某情況時處理其他都不處理；unless指定某情況時不處理其他都處理
+  >>>!!! note [程式碼(4.1.4 code)](:note:4a2057c6-9ac0-4624-9f2d-46ceadcc6cab)
+  >>>!!!
+  >>
+  >>###### <fontw>IDEA4_1_5 </fontw>
+  >>>##### 4.1.5. 連結href、引入src
+  >>>!!! note [程式碼(4.1.5 code)](:note:f24e8c73-b658-4fbd-bd94-959fdb24044d)
+  >>>!!!
+  >>
+  >>###### <fontw>IDEA4_1_6 </fontw>
+  >>>##### 4.1.6. form表單action、值value、Request重定向、html的\\<select>標籤
+  >>>form表單action內設定的路徑也可以是靜態html，只是就不會刷新Request，而\\<select>標籤內的value才是真的上送的值，最後重定向可以重新刷新指定的Request
+  >>>!!! note [程式碼(4.1.6 code)](:note:cd4de3d4-690a-4d4c-a867-a845605fb481)
+  >>>!!!
+  >>
+  >>###### <fontw>IDEA4_1_7 </fontw>
+  >>>##### 4.1.7. field、selected
+  >>>
+  >>>!!! note [程式碼(4.1.7 code)](:note:71d99bb7-c454-4ad6-86b9-ed4781979c58)
+  >>>!!!
+  >>
+  >>###### <fontw>IDEA4_1_8 </fontw>
+  >>>##### 4.1.8. 使用addFlashAttribute實現跨Request傳值
+  >>>!!! note [程式碼(4.1.8 code)](:note:9bad4214-91cb-479e-9eac-a95bd3f410f7)
+  >>>!!!
+  >>[返回目錄:arrow_up_small:](#TOP)
+  >>
+  ---
+  >## 5. 組合應用
+  >###### <fontw>IDEA5_1 </fontw>
+  >>#### 5.1. 表單處理
+  >>本節使用範例架構:![00017.jpg](C:/Boostnoteimg/00045.jpg)
+  >>###### <fontw>IDEA5_1_1 </fontw>
+  >>>##### 5.1.1. 表單數據傳輸
+  >>>本節提及很多重點，兩個實體類傳遞、標準化接口等
+  >>>!!! note [程式碼(5.1.1 code)](:note:481209b3-b541-4174-9fc4-c1600ecc975a)
+  >>>!!!
+  >>###### <fontw>IDEA5_1_2 </fontw>
+  >>>##### 5.1.2. 後端數據驗證
+  >>>針對要認證的實體類上加上標註如@NotBlank、@Length、@Pattern並且在Web層添加@Valid，就能夠實現驗證是否符合規則
+  >>>!!! note [程式碼(5.1.2 code)](:note:07294746-1170-4e61-bca0-062dd8c203de)
+  >>>!!! 
+  >>
+  >>###### <fontw>IDEA5_1_3 </fontw>
+  >>>##### 5.1.3. 渲染錯誤訊息至模板
+  >>>驗證完後，將錯誤訊息渲染至模板，須注意Model的傳遞，若有錯誤訊息跑步出來的問題可以參考[th:errors值出不來](http://forum.thymeleaf.org/Fields-object-functions-Spring-td3302513.html)
+  >>>!!! note [程式碼(5.1.3 code)](:note:2d88d4cc-e966-4844-87fd-6f5c2f1749f2)
+  >>>!!!
+  >>[返回目錄:arrow_up_small:](#TOP)
+  >>
+  >###### <fontw>IDEA5_2 </fontw>
+  >>#### 5.2. 頁面異常處理
+  >>###### <fontw>IDEA5_2_1 </fontw>
+  >>>##### 5.2.1. 自訂義錯誤頁面
+  >>>所定義的頁面如404、500、400錯誤的html檔，都要配置在static或templates路徑下，要注意的是static下的只能是靜態資源(頁面)無法嵌入動態程式碼，以下為在templates路徑下嵌入程式碼的動態錯誤頁面
+  >>>!!! note [程式碼(5.2.1 code)](:note:d4f241ff-fdf5-4bb1-a694-872c1173982f)
+  >>>!!!
+  >>[返回目錄:arrow_up_small:](#TOP)
+  >>
+  >>###### <fontw>IDEA5_2_2 </fontw>
+  >>>##### 5.2.2. 以HttpStatus重導向錯誤頁面
+  >>>假設希望改變預設的錯誤頁面，如回報的是500錯誤，但想顯示404錯誤，可以透過HttpStatus重導向到指定的錯誤頁面
+  >>>![00017.jpg](C:/Boostnoteimg/00046.jpg)
+  >>>!!! note [程式碼(5.2.2 code)](:note:dec8b314-f9c6-4c05-a546-cb73af7ceb6e)
+  >>>!!!
+  >>[返回目錄:arrow_up_small:](#TOP)
+  >>
+  >>###### <fontw>IDEA5_2_3 </fontw>
+  >>>##### 5.2.3. 單一外部控制器錯誤處理
+  >>>使用@ExceptionHandler針對某個外部控制器做統一錯誤處理，亦可以指定提早拋出錯誤
+  >>>!!!note
+  >>>!!!
+  >>[返回目錄:arrow_up_small:](#TOP)
+  >>
+  CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+  >>#### 5.1. 表單處理
+  >>
+  >>[返回目錄:arrow_up_small:](#TOP)
+  >>
+'''
+linesHighlighted: [
+  3
+  1
+]
+isStarred: false
+isTrashed: false

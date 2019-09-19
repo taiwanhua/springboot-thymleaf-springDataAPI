@@ -1,0 +1,281 @@
+createdAt: "2019-04-05T10:51:48.566Z"
+updatedAt: "2019-04-25T03:44:42.237Z"
+type: "MARKDOWN_NOTE"
+folder: "36ef10a205c49c0cdc86"
+title: "Spring-Boot標註使用"
+tags: [
+  "Spring-Boot"
+]
+content: '''
+  
+  # Spring-Boot標註使用
+  ---
+  ###### TOP
+  # 目錄
+  [@Controller標註(搭配模板thymeleaf)](#issue00001)
+  [@Controller標註傳遞參數](#issue00002)
+  [@RestController標註(不搭配模板thymeleaf)](#issue00003)
+  [@RestController標註傳遞參數(不搭配模板thymeleaf)](#issue00004)
+  [自訂義配置application.properties](#issue00005)
+  [application.properties自訂義參數調用(@Value("${name}")標籤)](#issue00006)
+  [application.properties自訂義參數交互傳遞使用](#issue00007)
+  [application.properties使用java實體類傳遞參數](#issue00008)
+  [application.yml使用](#issue00009)
+  [多環境配置](#issue00010)
+  [JPA引入配置，接MariaDB](#issue00011)
+  
+  ---
+  
+  目前有兩類標註:
+  一種搭配模板(thymeleaf)使用，另外一種不搭配模板(thymeleaf)，分別為@Controller標註、@RestController標註，以下分兩類說明
+  ###### issue00001
+  ###  @Controller標註(搭配模板thymeleaf):
+  ---
+  假設目前專案架構如圖:
+  ![00001.jpg](C:/Users/USER/Boostnote/img/00001.jpg)
+  #先引入Maven依賴
+  (org.springframework.boot
+  spring-boot-starter-thymeleaf)
+  [@Mavan依賴pom.xml](:note:f870bfe4-3fe7-47a4-9fd6-f084d76ed2ce)
+  以下標註方法會在網址(http://127.0.0.1:8080/api/books)使用java程式碼並顯示出如下圖:
+  ![00003.jpg](C:/Users/USER/Boostnote/img/00003.jpg)
+  #### 程式碼:
+  [@Controller標註使用java方法](:note:f870bfe4-3fe7-47a4-9fd6-f084d76ed2ce)
+  若想要使用html的頁面，則註解掉上方連結內hello.java第14行，並且修改方法return值要等於html頁面的名字，結果如下圖:
+  ![00004.jpg](C:/Users/USER/Boostnote/img/00004.jpg)
+  [返回目錄:arrow_up_small:](#TOP)
+  ###### issue00002
+  ### @Controller標註傳遞參數 
+  ---
+  參數傳遞，針對網址列上加上參數，如(http://127.0.0.1:8080/name/books/1)
+  透過@PathVariable標註讓其傳遞，java內有使用System.out.println輸出在console證明真的有抓到
+  < 節錄程式碼
+  @ResponseBody
+  @GetMapping("/book/{id}")
+  public Map one(@PathVariable("id") long id) {
+  />
+  使用推薦時機如圖
+  ![00009.jpg](C:/Users/USER/Boostnote/img/00009.jpg)
+  #### 程式碼:
+  [@Controller標註java方法傳遞參數GET方法](:note:90ee95be-c1c0-44f5-be65-e569cec58eb4)
+  效果如圖:
+  ![00005.jpg](C:/Users/USER/Boostnote/img/00005.jpg)
+  ![00006.jpg](C:/Users/USER/Boostnote/img/00006.jpg)
+  [返回目錄:arrow_up_small:](#TOP)
+  ###### issue00003
+  ###  @RestController標註(不搭配模板thymeleaf)
+  ---
+  在@RestController下使用@RequestMapping表示接受任何請求方法，這點可用Postman獲得證明，若要指定Request方法可用@RequestMapping(value = "/say", method = RequestMethod.GET)，其縮寫為@GetMapping("/say")
+  效果如下圖
+  ![00007.jpg](C:/Users/USER/Boostnote/img/00007.jpg)
+  #### 程式碼:
+  [@RestController標註方法](:note:a43d60e3-00fb-4414-ae3d-3d9a1d160975)
+  [返回目錄:arrow_up_small:](#TOP)
+  ###### issue00004
+  ###  @RestController標註傳遞參數(不搭配模板thymeleaf)
+  ---
+  1. GET方法傳遞參數值得注意的是網址列後面接的(http://127.0.0.1:8080/name/books/1)事實上是字串型態，但會標註自動轉型成指定的型態，也能傳遞多參數，也能把參數提到固定網址字串前或添加正則表達式
+     #### 程式碼:
+     [@RestController標註傳遞參數GET方法@PathVariable](:note:4cf7dfbf-f7b5-436c-910c-3acbedfc1062)
+  2. 使用網址 ?param=XXXX 方式傳遞參數(GET Request)，(@RequestParam標籤)，如圖
+     ![00008.jpg](C:/Users/USER/Boostnote/img/00008.jpg)
+     此外若傳入參數有少，則會回報錯誤400，多了沒關係。然後想定義預設參數也可以設定在@RequestParam(defaultValue ="0")
+     #### 程式碼:
+     [網址 ?param=XXXX 方式傳遞參數(GET Request)](:note:e309a846-74bd-4a95-83d3-31c5b1273af1)
+  3. POST方法傳遞參數，只在POSTMAN工具測成功，如下列程式碼
+     #### 程式碼:
+     [@RestController標註傳遞參數POST方法@RequestParam](:note:36ea9b1f-7882-4284-b199-428c3e704d16)
+  
+  [返回目錄:arrow_up_small:](#TOP)
+  ###### issue00005
+  ### 自訂義配置application.properties
+  ---
+  ![00001.jpg](C:/Users/USER/Boostnote/img/00001.jpg)
+  |語法           |作用          |範例      |
+  |:------------- |:-------------|:-----------|
+  |server.port    | 自訂port號碼| server.port=8082|
+  |server.servlet.context-path| 添加路徑(全域)      |server.servlet.context-path=/path|
+  |logging.level|設定指定目錄之log級別|logging.level.root=WARN<br>logging.level.com.ahua.springdemo=Debug<br>![00010.jpg](C:/Users/USER/Boostnote/img/00010.jpg)|
+  |logging.file|指定log檔案存放位置|logging.file=log/mylog|
+  |logging.pattern.file|自訂義log輸出格式|見程式碼連結|
+  PS:若有多個application.properties檔案在同一個專案內，會找在路徑 resources/config下面的。
+  #### 程式碼:
+  [application.properties](:note:f940e46e-7956-4db4-84d9-ec9322831a8d)
+  !!!  note Spring-boot logging文檔網址 !!!
+  [26. Logging](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-logging.html)
+  !!!
+  !!!  note 配置檔亦可用yml格式 !!!
+  如圖![00011.jpg](C:/Users/USER/Boostnote/img/00011.jpg)
+  !!!
+  [返回目錄:arrow_up_small:](#TOP)
+  ###### issue00006
+  ### application.properties自訂義參數調用(@Value("${name}")標籤)
+  ---
+  解決中文亂碼問題(也可直接用yml寫就不會有亂碼問題):
+  * 步驟一 改IDEA預設編碼  ![00012.jpg](C:/Users/USER/Boostnote/img/00012.jpg)
+  * 步驟二 改tomcat、spring預設編碼
+    application.properties文件內添加2行
+    spring.http.encoding.charset=UTF-8
+    server.tomcat.uri-encoding=UTF-8
+  #### 程式碼:
+  [application.properties自訂義參數調用(@Value("${name}")標籤)](:note:cea26773-b606-43a6-bca6-6d2e89f82f59)
+  [返回目錄:arrow_up_small:](#TOP)
+  ###### issue00007
+  ### application.properties自訂義參數交互傳遞使用
+  ---
+  結果如圖![00013.jpg](C:/Users/USER/Boostnote/img/00013.jpg)
+  #### 程式碼:
+  [application.properties自訂義參數交互傳遞使用](:note:3f7bcdb9-8bb8-479e-a058-bfe0a5ca8c5c)
+  [返回目錄:arrow_up_small:](#TOP)
+  ###### issue00008
+  ###  application.properties使用java實體類傳遞參數
+  ---
+  因為如果要像 [issue00006](#issue00006)使用@Value標籤做多個值得傳遞，那得一個一個去做對應，會非常非常麻煩，所以可以使用實體類別搭配@Component、@ConfigurationProperties、@Autowired()標籤完成大量參數配置(當然亦可在實體類別內使用@Value標籤)
+  #### 程式碼:
+  [application.properties使用java實體類傳遞參數](:note:d9d6bb0b-4cdb-47c1-84bd-b59da4d686dd)
+  [返回目錄:arrow_up_small:](#TOP)
+  ###### issue00009
+  ###  application.yml使用
+  ---
+  這裡解釋application.yml與使用，下圖先展示同時與application.properties存在但因為在config資料夾內，所以會先使用yml；並且拿掉了為了解決亂碼問題的UTF-8程式碼，也展示了程式碼。
+  ![00014.jpg](C:/Users/USER/Boostnote/img/00014.jpg)
+  效果圖如下
+  ![00015.jpg](C:/Users/USER/Boostnote/img/00015.jpg)
+  #### 程式碼:
+  [application.yml使用](:note:ceca6c95-c181-4318-8c14-36a947800d36)
+  [返回目錄:arrow_up_small:](#TOP)
+  ###### issue00010
+  ###  多環境配置
+  ---
+  假設現有多個環境、如DEV、UAT要做切換，可以透過spring.profiles.active等於某環境指定，另外spring.profiles.active可以指定多個值可以用在例如遭料庫也要分開指定的情況。配置如下圖
+  ![00016.jpg](C:/Users/USER/Boostnote/img/00016.jpg)
+  基本上若在此application.yml內指定就可以達到切換環境的效果，但是若想要不動手改文件，可以透過jar包運行指令的方式改，先上程式碼，下方再解說如何透過jar運行換環境
+  #### 程式碼:
+  [多環境配置](:note:89df966b-a923-4e5a-bee5-4cabc1a0f342)
+  !!! note 使用jar包切換環境 !!!
+  第一步、將專案用Maven打包
+  ```bash
+  在CMD 或終端機輸入指令打包jar
+  ，或直接IDEA打包
+  mvn package
+  ```
+  ![00017.jpg](C:/Users/USER/Boostnote/img/00017.jpg)
+  第二步、運行jar包，並針對spring.profiles.active做修改
+  ```bash
+  在CMD 或終端機輸入指令
+  cd target//切換至專案路徑下target
+  dir 列出所有
+  java -jar springdemo-0.0.1-SNAPSHOT.jar --spring.profiles.active=dev //切到DEV環境
+  ```
+  這樣就會切換環境了，但是他是在終端機開SERVER
+  !!!
+  
+  [返回目錄:arrow_up_small:](#TOP)
+  ###### issue00011
+  ###  JPA引入配置，接MariaDB
+  ---
+  
+  > 先講解JPA架構
+  
+  ```mermaid
+  
+  graph LR
+  MTB(MariaDB Table)
+  MDB(MariaDB Database)
+  JPAI(JPA接口數據操作層)
+  JPAS(JPA服務層)
+  CLS(java實體類<br>需對應資料表)
+  WEB(WEB層<br>網頁畫面)
+  MDB --> MTB
+  JPAI--持久化接口-->MDB
+  JPAS-->JPAI
+  WEB-->JPAS
+  
+  
+  
+  ```
+  
+  首先如果是在剛創建專案時可以直接配置好JPA接口如下圖設定
+  ![00018.jpg](C:/Users/USER/Boostnote/img/00018.jpg)
+  那再說，如果已經不是初始構建了，那要如何做；先引入MavenJPA依賴與Mysql數據庫依賴:
+  ```bash
+  <dependency>
+              <groupId>org.mariadb.jdbc</groupId>
+              <artifactId>mariadb-java-client</artifactId>
+  </dependency>
+  <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-data-jpa</artifactId>
+  </dependency>
+  ```
+  如下圖
+  ![00021.jpg](C:/Users/USER/Boostnote/img/00021.jpg)
+  引入依賴後做application-dev.yml配置檔配置:
+  ```bash
+  spring:
+    datasource:
+      driver-class-name: org.mariadb.jdbc.Driver
+      url: jdbc:mariadb://220.135.152.185:3306/book?useUnicode=true&characterEncoding=utf-8
+      username: fansofcheer
+      password: cheerstyle
+    jpa:
+      hibernate:
+        ddl-auto: create
+      show-sql: true
+  ```
+  >如下圖:
+  <red>jdbc:mariadb://<blue>220.135.152.185</blue>:3306/<blue>book</blue>?</red>
+  其中IP可以是localhost或127.0.0.1那就是本機，book是資料庫名，代表你已經預先建立這個資料庫。這裡展示的是連遠端資料庫的範例<red>(另外如果用本機資料庫結果IP指定localhost或127.0.0.1，那你資料庫端帳號的主機名稱一定要是localhost的才行，不然會噴錯，只有遠端的主機名稱才要是%，代表讓所有IP連)</red>
+  ![00020.jpg](C:/Users/USER/Boostnote/img/00020.jpg)
+  
+  >配置的工作都完成了，接下來用class做實體化類對應table
+  
+  ![00022.jpg](C:/Users/USER/Boostnote/img/00022.jpg)
+  !!! note 說明jpa.hibernate.ddl-auto:參數
+  這幾個參數設置了是對所有表都起作用
+  ## Table
+  | 參數        | 效果           
+  | ------------- |:-------------:|
+  | create      | 會刪除上一次的生成的表，然後根據指定新來生成新表。 |
+  | create-drop      | 每次加載休眠時根據模型類生成表，但是SessionFactory的一關閉，表就自動刪除。      |
+  | update | 當沒有表就建一個，有就直接使用表      |
+  | validate     | 加載時，驗證創建數據庫表結構 |
+  
+  
+  !!!
+  <red>這個例子只會創建表，並不會有傳值的溝通</red>
+  #### 程式碼:
+  [JPA引入配置，接MariaDB](:note:5e800d1d-2bba-4d3c-a099-190725a63315)
+  >做到上面程式碼連結這裡，只會產生一個 table，是無法對數據庫進行操作，往下會再說明JPA自訂方法新增、修改、查詢、刪除、複雜查詢、自行定義query語法、JPQL。
+  在此之前先看看專案架構如下
+  
+  #### 專案架構:
+  >下面專案架構圖片內已經將JPA的接口、服務、web層都配置好了，並且沿用了上面的Book實體類別
+  
+  <red>註:圖片內BookRepository 注意是一個接口類(interface)</red>
+  ![00023.jpg](C:/Users/USER/Boostnote/img/00023.jpg)
+  
+  >以下為資料庫資料情況，如果有用自動排序，那id的key值會紀錄在hibernate_sequence裡，那我們先把資料預打進去(用csv匯入會有中文編碼問題，可以用notepad轉存編碼)，再往下會附上程式碼紀錄以JPA對資料庫做實際操作
+  
+  ![00024.jpg](C:/Users/USER/Boostnote/img/00024.jpg)
+  
+  #### 程式碼:
+  [JPA資料庫操作](:note:44934f5c-58bd-49f0-8d37-53afbf4d91ca)
+  
+  [返回目錄:arrow_up_small:](#TOP)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  12節
+'''
+linesHighlighted: [
+  30
+]
+isStarred: false
+isTrashed: false

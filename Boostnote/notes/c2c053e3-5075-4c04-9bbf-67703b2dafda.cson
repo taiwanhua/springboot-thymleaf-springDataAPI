@@ -1,0 +1,141 @@
+createdAt: "2019-05-03T16:16:14.938Z"
+updatedAt: "2019-05-03T16:30:36.640Z"
+type: "SNIPPET_NOTE"
+folder: "888163b6bb8ae21eaf80"
+title: "1.8方法2 code"
+tags: []
+description: "1.8方法2 code"
+snippets: [
+  {
+    linesHighlighted: []
+    name: "application.properties"
+    mode: "Properties files"
+    content: '''
+      book.name=測試傳遞參數
+      book.id=99999999
+      book.at=at參數${random.uuid}
+      book.retest=${book.name},try it
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "Book.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.domin;
+      
+      import org.springframework.boot.context.properties.ConfigurationProperties;
+      import org.springframework.stereotype.Component;
+      
+      @Component // 要有這個標註讓Hello.java的@Autowired()可以對應
+      @ConfigurationProperties(prefix = "book") // 為application.properties內book項下的所有參數
+      public class Book {//創建實體類叫做Book
+        String name;
+        String at;
+        String id;
+      
+        public Book() {}
+      
+        public String getName() {
+          return name;
+        }
+      
+        public void setName(String name) {
+          this.name = name;
+        }
+      
+        public String getAt() {
+          return at;
+        }
+      
+        public void setAt(String at) {
+          this.at = at;
+        }
+      
+        public String getId() {
+          return id;
+        }
+      
+        public void setId(String id) {
+          this.id = id;
+        }
+      }
+      /* 硬要@Value標註也可以
+      package com.example.boottest.domin;
+      
+      import org.springframework.boot.context.properties.ConfigurationProperties;
+      import org.springframework.stereotype.Component;
+      
+      @Component
+      public class Book {
+          @Value("${book.name}")
+          String name;
+          @Value("${book.id}")
+          String id;
+          @Value("${book.at}")
+          String at;
+      
+          public Book() {
+          }
+      
+          public String getName() {
+              return name;
+          }
+      
+          public void setName(String name) {
+              this.name = name;
+          }
+      
+          public String getId() {
+              return id;
+          }
+      
+          public void setId(String id) {
+              this.id = id;
+          }
+      
+          public String getAt() {
+              return at;
+          }
+      
+          public void setAt(String at) {
+              this.at = at;
+          }
+      }
+      
+      */
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "contest.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.web;
+      
+      import com.example.boottest.domin.Book;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.stereotype.Controller;
+      import org.springframework.web.bind.annotation.GetMapping;
+      import org.springframework.web.bind.annotation.ResponseBody;
+      
+      @Controller
+      public class contest {
+          
+          @Autowired
+          public Book bo;
+      
+        @ResponseBody
+        @GetMapping("/book")
+        public Book one() {
+      
+          return bo;
+        }
+      }
+      
+    '''
+  }
+]
+isStarred: false
+isTrashed: false

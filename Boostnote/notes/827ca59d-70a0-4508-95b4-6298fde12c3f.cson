@@ -1,0 +1,35 @@
+createdAt: "2019-05-04T04:00:03.400Z"
+updatedAt: "2019-05-04T04:00:32.312Z"
+type: "SNIPPET_NOTE"
+folder: "888163b6bb8ae21eaf80"
+title: "2.2 方法3 code"
+tags: []
+description: "2.2 方法3 code "
+snippets: [
+  {
+    linesHighlighted: []
+    name: "contest.java"
+    mode: "Java"
+    content: '''
+      package com.example.boottest.web;
+      
+      import com.example.boottest.domin.Book;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.stereotype.Controller;
+      import org.springframework.web.bind.annotation.*;
+      
+      @RestController
+      public class contest {
+      
+        @GetMapping("/s")
+        public String one() {
+      
+          return "hi";
+        }
+      }
+      
+    '''
+  }
+]
+isStarred: false
+isTrashed: false

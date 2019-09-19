@@ -1,0 +1,42 @@
+createdAt: "2019-04-06T16:45:05.636Z"
+updatedAt: "2019-04-06T23:04:14.008Z"
+type: "SNIPPET_NOTE"
+folder: "36ef10a205c49c0cdc86"
+title: "@RestController標註傳遞參數POST方法@RequestParam"
+tags: []
+description: "@RestController標註傳遞參數POST方法@RequestParam"
+snippets: [
+  {
+    linesHighlighted: []
+    name: "Hello.java"
+    mode: "Java"
+    content: '''
+      package com.ahua.springdemo.web;
+      
+      import org.springframework.stereotype.Controller;
+      import org.springframework.web.bind.annotation.*;
+      
+      import java.util.HashMap;
+      import java.util.Map;
+      
+      //@Controller
+      @RestController
+      @RequestMapping("/api")
+      public class Hello {
+      
+          @PostMapping("/book/post")
+          public Map post(@RequestParam String name, @RequestParam String id, @RequestParam String ibsn) {
+              Map<String, Object> bookmap = new HashMap<>();
+              System.out.println("-------------name:" + name+"</br>-------------id:"+id+"</br>-------------ibsn:"+ibsn);
+              bookmap.put("name",name);
+              bookmap.put("id",id);
+              bookmap.put("ibsn",ibsn);
+              return bookmap;
+          }
+      }
+      
+    '''
+  }
+]
+isStarred: false
+isTrashed: false

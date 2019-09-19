@@ -1,0 +1,76 @@
+createdAt: "2019-04-05T13:57:06.703Z"
+updatedAt: "2019-04-06T16:02:45.626Z"
+type: "SNIPPET_NOTE"
+folder: "36ef10a205c49c0cdc86"
+title: "@Controller標註java方法傳遞參數GET方法"
+tags: []
+description: "@Controller標註java方法傳遞參數GET方法"
+snippets: [
+  {
+    linesHighlighted: []
+    name: "Hello.java"
+    mode: "Java"
+    content: '''
+      package com.ahua.springdemo.web;
+      
+      import org.springframework.stereotype.Controller;
+      import org.springframework.web.bind.annotation.*;
+      
+      import java.util.HashMap;
+      import java.util.Map;
+      
+      //@RestController
+      @Controller
+      @RequestMapping("/api")
+      public class Hello {
+      
+          @ResponseBody
+          @GetMapping("/book/{id}")
+          public Map one(@PathVariable("id") long id) {
+              System.out.println("-------------id:" + id);
+              Map<String, Object> bookmap = new HashMap<>();
+              bookmap.put("name", "我是一本書");
+              bookmap.put("number", "123156465451321");
+              return bookmap;
+          }
+      }
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "book.html"
+    mode: "HTML"
+    content: '''
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8" />
+          <title>book</title>
+      </head>
+      <body>
+      <h2>sssss</h2>
+      </body>
+      </html>
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "books.html"
+    mode: "HTML"
+    content: '''
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8" />
+          <title>Books</title>
+      </head>
+      <body>
+      <h1>hi my books</h1>
+      </body>
+      </html>
+    '''
+  }
+]
+isStarred: false
+isTrashed: false

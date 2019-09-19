@@ -1,0 +1,276 @@
+createdAt: "2019-04-25T03:18:34.460Z"
+updatedAt: "2019-04-25T03:43:10.814Z"
+type: "SNIPPET_NOTE"
+folder: "36ef10a205c49c0cdc86"
+title: "JPA資料庫操作"
+tags: []
+description: "JPA資料庫操作"
+snippets: [
+  {
+    linesHighlighted: []
+    name: "BookCtrl.java"
+    mode: "Java"
+    content: '''
+      //web層，在注入服務層Bookservice bookservice後，就能使用服務層的方法做資料庫操作
+      
+      package com.ahua.springdemo.web;
+      
+      import com.ahua.springdemo.domain.Book;
+      import com.ahua.springdemo.service.Bookservice;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.web.bind.annotation.*;
+      
+      import java.util.List;
+      
+      @RestController
+      @RequestMapping(value = "/ap1/v1", method = RequestMethod.GET)
+      public class BookCtrl {
+      
+          //WEB層
+          @Autowired
+          private Bookservice bookservice;//注入
+      
+          /**
+           *取得資料庫列表
+           * @return
+           */
+          @GetMapping("/book")
+          public List<Book> getAll() {
+              return bookservice.findALLddd();
+          }
+      
+          @PostMapping("/book")
+          public Book savee(@RequestParam String at, @RequestParam String name, @RequestParam String number, @RequestParam String retest) {
+              Book book = new Book();
+              book.setAt(at);
+              book.setName(name);
+              book.setNumber(number);
+              book.setRetest(retest);
+              return bookservice.savee(book);
+          }
+      
+          @GetMapping("/book/{id}")
+          public Book findone(@PathVariable long id) {
+              return bookservice.findonee(id);
+          }
+      
+          @PutMapping("/book")
+          public Book updateone(Book book) {
+              return bookservice.updateonee(book);
+          }
+          //    @PutMapping("/book")
+          //    public Book updateone(@RequestParam long id, @RequestParam String at, @RequestParam String name, @RequestParam String number, @RequestParam String retest) {
+          //        Book book = new Book();
+          //        book.setId(id);
+          //        book.setAt(at);
+          //        book.setName(name);
+          //        book.setNumber(number);
+          //        book.setRetest(retest);
+          //        return bookservice.updateonee(book);
+          //    }
+      
+          @DeleteMapping("/book/{id}")
+          public void del(@PathVariable long id) {
+              bookservice.deleteonee(id);
+          }
+          /////////複雜查詢
+          @PostMapping("/book/f")
+          public List<Book> findbyname(@RequestParam String name){
+              return bookservice.findbynamee(name);
+          }
+          @PostMapping("/book/fb")
+          public List<Book> findbynamebe(@RequestParam String name,@RequestParam long min,@RequestParam long max){
+              return bookservice.findbynameebet(name,min,max);
+          }
+          @PostMapping("/book/fl")
+          public List<Book> findbynamebe(@RequestParam String name){
+              return bookservice.findbynameelike(name);
+          }
+          @PostMapping("/book/fj")
+          public List<Book> findbyjpql(@RequestParam int i){
+              return bookservice.findbyJPQL(i);
+          }
+      }
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "Bookservice.java"
+    mode: "Java"
+    content: '''
+      //再服務層裡面主要在調用接口層裡的方法並返回給WEB層
+      
+      package com.ahua.springdemo.service;
+      
+      import com.ahua.springdemo.domain.Book;
+      import com.ahua.springdemo.domain.BookRepository;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.stereotype.Service;
+      
+      import java.util.List;
+      
+      @Service
+      public class Bookservice {
+      
+          //Service層
+          @Autowired
+          private BookRepository bookRepository;
+      /*
+      * 返回全部
+      * */
+          public List<Book> findALLddd() {
+              return bookRepository.findAll();
+          }
+      /*
+      插入一個
+      * */
+          public Book savee(Book book) {
+              return bookRepository.save(book);
+          }
+      /*
+      * 查一個
+      * */
+          public Book findonee(long id) {
+              return bookRepository.findById(id).orElse(null);
+          }
+          /*
+          * 更新一個
+          * */
+          public Book updateonee(Book book){
+              return bookRepository.save(book);
+          }
+          public void deleteonee(long id){
+              bookRepository.deleteById(id);
+          }
+          ///////複雜查詢
+          public List<Book> findbynamee(String name){
+              return bookRepository.findByName(name);
+          }
+          public List<Book> findbynameebet(String name,long min,long max){
+              return bookRepository.findByNameAndAndIdBetween(name,min,max);
+          }
+          public List<Book> findbynameelike(String name){
+              return bookRepository.findByNameContains(name);
+          }
+          public List<Book> findbyJPQL(int i){
+              return bookRepository.findByJPQL(i);
+          }
+      }
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "BookRepository.java"
+    mode: "Java"
+    content: '''
+      //此為接口層(數據操作層)，可以看到在方法上就已經定了interface BookRepository併繼成JpaRepository<Book, Long>，在這裡可以自訂查詢，或使用Query，並且提供JPA的方法供服務層使用 
+      package com.ahua.springdemo.domain;
+      
+      import org.springframework.data.jpa.repository.JpaRepository;
+      import org.springframework.data.jpa.repository.Query;
+      
+      import java.util.List;
+      
+      public interface BookRepository extends JpaRepository<Book, Long> {
+          //數據操作層
+      
+          /**
+           *定義已name查詢
+           */
+          List<Book> findByName(String name);
+      
+          List<Book> findByNameAndAndIdBetween(String name, long min, long max);
+      
+          List<Book> findByNameContains(String name);
+      
+          //@Query("select b from Book b where length(b.number)>?1 ")
+          @Query(value = "select * from book b where length(number)>?1 ",nativeQuery = true)
+          List<Book> findByJPQL(int i);
+      }
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "Book.java"
+    mode: "Java"
+    content: '''
+      //實體類為對應table用主要給服務層、接口層、web層做傳遞用資料，因為table的欄位都對應到這個實體類，所以直接用這個實體類來接查詢回來的東西就好，刪除修改也是如此
+      
+      package com.ahua.springdemo.domain;
+      
+      import org.hibernate.annotations.ValueGenerationType;
+      import org.springframework.boot.context.properties.ConfigurationProperties;
+      import org.springframework.stereotype.Component;
+      
+      import javax.persistence.Entity;
+      import javax.persistence.GeneratedValue;
+      import javax.persistence.GenerationType;
+      import javax.persistence.Id;
+      
+      @Entity
+      public class Book {
+      
+          @Id
+          @GeneratedValue(strategy = GenerationType.AUTO)
+          private long id;
+      
+          private String name;
+      
+          private String number;
+      
+          private String at;
+      
+          private String retest;
+      
+          public Book() {
+          }
+      
+          public long getId() {
+              return id;
+          }
+      
+          public void setId(long id) {
+              this.id = id;
+          }
+      
+          public String getName() {
+              return name;
+          }
+      
+          public void setName(String name) {
+              this.name = name;
+          }
+      
+          public String getNumber() {
+              return number;
+          }
+      
+          public void setNumber(String number) {
+              this.number = number;
+          }
+      
+          public String getAt() {
+              return at;
+          }
+      
+          public void setAt(String at) {
+              this.at = at;
+          }
+      
+          public String getRetest() {
+              return retest;
+          }
+      
+          public void setRetest(String retest) {
+              this.retest = retest;
+          }
+      }
+      
+    '''
+  }
+]
+isStarred: false
+isTrashed: false

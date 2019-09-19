@@ -1,0 +1,87 @@
+createdAt: "2019-04-13T17:13:59.084Z"
+updatedAt: "2019-04-13T17:32:57.102Z"
+type: "SNIPPET_NOTE"
+folder: "36ef10a205c49c0cdc86"
+title: "多環境配置"
+tags: []
+description: "多環境配置"
+snippets: [
+  {
+    linesHighlighted: []
+    name: "application.yml"
+    mode: "YAML"
+    content: '''
+      #這個application.yml 是預設會走進來，在此指定要使用的配置檔部分名稱，則會跳轉使用指定之檔案
+      spring:
+        profiles:
+          active: uat
+      
+      logging:
+        level:
+          root: WARN
+          com:
+            ahua:
+              springdemo: Debug
+        file: log/mylog
+      book:
+        name: 測試參數
+        id: 77777
+        at: at參數${random.uuid}
+        retest: ${book.name},try it
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "application-uat.yml"
+    mode: "YAML"
+    content: '''
+      server:
+        port: 8081
+        servlet:
+          context-path: /path
+      
+      logging:
+        level:
+          root: WARN
+          com:
+            ahua:
+              springdemo: Debug
+        file: log/mylog
+      book:
+        name: 測試參數UAT
+        id: 77777
+        at: at參數${random.uuid}
+        retest: ${book.name},try it
+      
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "application-dev.yml"
+    mode: "YAML"
+    content: '''
+      server:
+        port: 8082
+        servlet:
+          context-path: /path
+      
+      logging:
+        level:
+          root: WARN
+          com:
+            ahua:
+              springdemo: Debug
+        file: log/mylog
+      book:
+        name: 測試參數DEV
+        id: 77777
+        at: at參數${random.uuid}
+        retest: ${book.name},try it
+      
+    '''
+  }
+]
+isStarred: false
+isTrashed: false
